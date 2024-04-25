@@ -5,7 +5,7 @@
   <groupId>com.medilab</groupId>
   <artifactId>Ramonet_Joffrey_MediLabo_Solutions</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <packaging>jar</packaging>
+  <packaging>pom</packaging>
 
   <name>Ramonet_Joffrey_MediLabo_Solutions</name>
   <url>https://maven.apache.org</url>
@@ -13,6 +13,10 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
+
+  <modules>
+    <module>microservice_back</module>
+  </modules>
 
   <dependencies>
     <dependency>

@@ -1,4 +1,4 @@
-package com.medilab.microservice_back;
+package com.medilab.microserviceback;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
