@@ -1,19 +1,19 @@
 package com.medilab.microserviceback.repository;
 
 import com.medilab.microserviceback.model.Patient;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
-@Component
+@Repository
 public class PatientRepositoryImpl implements PatientRepository{
     
-    private final ClientMySql repository;
-    
-    public PatientRepositoryImpl(ClientMySql repository) {
-        this.repository = repository;
-    }
+    @Autowired
+    private  ClientMySql repository;
     
     @Override
     public List<Patient> findAll() {
