@@ -14,5 +14,4 @@ public interface PatientUseCase {
     Patient save(PatientSaveDto patientSaveDto);
     Patient update(PatientUpdateDto patientUpdateDto);
     void deleteById(String id);
-    void deleteByName(String firstname, String lastname);
 }

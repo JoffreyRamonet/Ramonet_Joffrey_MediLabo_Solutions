@@ -37,14 +37,11 @@ public class PatientController {
         return patients;
     }
     
-    @GetMapping("/{firstname}/{lastname}")
-    public Patient getByNames(
+    @GetMapping("/{id}")
+    public Patient getById(
             @PathVariable
-            final String firstname,
-            @PathVariable
-            final String lastname) {
-        
-        Optional<Patient> patient = patientService.getByName(firstname, lastname);
+            final String id) {
+        Optional<Patient> patient = patientService.getById(id);
         
         if(patient.isEmpty()) {
             throw new DataNotFoundException("Patient not found");
@@ -80,21 +77,19 @@ public class PatientController {
         
         return patientService.update(patientUpdateDto);
     }
-    
+
     @Transactional
-    @DeleteMapping("/delete/{firstname}/{lastname}")
-    public void deleteByName(
+    @DeleteMapping("/delete/{id}")
+    public void deleteById(
             @PathVariable
-            final String firstname,
-            @PathVariable
-            final String lastname) {
-        
-        
-        if(patientService.getByName(firstname, lastname)
+            final String id) {
+        log.debug(id);
+        if(patientService.getById(id)
                 .isEmpty()) {
             throw new DataNotFoundException("Patient not found");
         }
         
-        patientService.deleteByName(firstname, lastname);
+        patientService.deleteById(id);
     }
+
 }
