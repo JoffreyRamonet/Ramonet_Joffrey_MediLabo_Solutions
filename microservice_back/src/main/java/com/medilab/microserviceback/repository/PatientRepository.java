@@ -12,5 +12,4 @@ public interface PatientRepository {
     Optional<Patient> findByFirstNameAndLastName(String firstName, String lastName);
     Patient save(Patient patient);
     void deleteById(String id);
-    void deleteByFirstNameAndLastName(String firstName, String lastName);
 }

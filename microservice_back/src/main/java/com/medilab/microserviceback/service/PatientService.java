@@ -73,8 +73,5 @@ public class PatientService implements PatientUseCase {
         log.debug("Patient's id to delete: " + id);
         repository.deleteById(id);
     }
-    
-    public void deleteByName(String firstname, String lastname) {
-        repository.deleteByFirstNameAndLastName(firstname, lastname);
-    }
+
 }

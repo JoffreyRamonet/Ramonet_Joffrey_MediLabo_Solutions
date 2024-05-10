@@ -8,5 +8,4 @@ import java.util.Optional;
 
 public interface ClientMySql extends JpaRepository<Patient, String> {
     Optional<Patient> findByFirstNameAndLastName(String firstName, String lastName);
-    void deleteByFirstNameAndLastName(String firstName, String lastName);
 }
