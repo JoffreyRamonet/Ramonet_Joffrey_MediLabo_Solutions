@@ -40,9 +40,5 @@ public class PatientRepositoryImpl implements PatientRepository{
     repository.deleteById(id);
     }
     
-    @Override
-    public void deleteByFirstNameAndLastName(String firstName, String lastName) {
-    repository.deleteByFirstNameAndLastName(firstName, lastName);
-    }
     
 }

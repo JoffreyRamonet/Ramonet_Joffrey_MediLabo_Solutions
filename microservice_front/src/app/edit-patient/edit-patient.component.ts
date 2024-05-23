@@ -4,8 +4,10 @@ import {Patient} from "../model/patient.model";
 import {UpdatePatient} from "../model/updatePatient.model";
 import {PatientService} from "../service/patient-service";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
-import {Observable, Subscription, tap} from "rxjs";
+import {Observable, tap} from "rxjs";
 import {AsyncPipe, NgIf} from "@angular/common";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
 
 @Component({
   selector: 'app-edit',
@@ -14,7 +16,9 @@ import {AsyncPipe, NgIf} from "@angular/common";
     ReactiveFormsModule,
     AsyncPipe,
     NgIf,
-    RouterLink
+    RouterLink,
+    MatFormFieldModule,
+    MatInputModule
   ],
   templateUrl: './edit-patient.component.html',
   styleUrl: './edit-patient.component.scss'
@@ -28,7 +32,7 @@ export class EditPatientComponent implements OnInit {
 
   firstName!: string;
   lastName!: string;
-  constructor(private formBuilde: FormBuilder, private patientService: PatientService, private router: Router, private route: ActivatedRoute) {
+  constructor(private formBuilder: FormBuilder, private patientService: PatientService, private router: Router, private route: ActivatedRoute) {
   }
 
 
@@ -36,7 +40,7 @@ export class EditPatientComponent implements OnInit {
     this.patient$ = this.patientService.getPatientById(this.id);
     this.patient$.subscribe(patient => { this.firstName = patient.firstName});
     this.patient$.subscribe(patient => { this.lastName = patient.lastName});
-    this.editForm = this.formBuilde.group({
+    this.editForm = this.formBuilder.group({
       lastName: [null],
       firstName: [null],
       gender: [null],
