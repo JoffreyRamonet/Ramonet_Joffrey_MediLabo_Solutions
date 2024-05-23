@@ -51,10 +51,5 @@ public class PatientRepositoryStub implements PatientRepository {
                 .equals(id));
     }
     
-    @Override
-    public void deleteByFirstNameAndLastName(String firstName, String lastName) {
-        patients.removeIf(patient -> patient.getFirstName()
-                .equals(firstName) && patient.getLastName()
-                .equals(lastName));
-    }
+
 }
