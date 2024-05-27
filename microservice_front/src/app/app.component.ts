@@ -5,9 +5,10 @@ import {
   PatientListComponent
 } from "./patient-list/patient-list.component";
 import {AsideComponent} from "./aside/aside.component";
-import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
+import {KeycloakAngularModule} from "keycloak-angular";
 import {HttpClientModule} from "@angular/common/http";
-import {KeycloakProfile} from "keycloak-js";
+import {AuthService} from "./security/auth-service";
+
 
 @Component({
   selector: 'app-root',
@@ -18,16 +19,16 @@ import {KeycloakProfile} from "keycloak-js";
 })
 export class AppComponent implements OnInit {
   title = 'microservice_front';
+  token !: null | string;
 
-  public profile? : KeycloakProfile;
-  constructor(public keycloakService:KeycloakService) {
-  }
-  ngOnInit() {
-    if(this.keycloakService.isLoggedIn()){
-      this.keycloakService.loadUserProfile().then(profile=>{
-        this.profile=profile;
-      });
-    }
-  }
+  constructor(public keycloak: AuthService) {}
 
+  // The interceptor doesn't work if the ngOnInit is removed... But why?..
+
+  ngOnInit(): void {
+    this.keycloak.getToken().then(data => {
+      this.token = data;
+    })
+  }
 }
+

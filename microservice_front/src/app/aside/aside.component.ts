@@ -1,9 +1,7 @@
 import {Component} from '@angular/core';
 import {RouterLink} from "@angular/router";
 import {NgIf} from "@angular/common";
-import {SecurityService} from "../security/SecurityService";
-
-
+import {AuthService} from "../security/auth-service";
 
 @Component({
   selector: 'app-aside',
@@ -15,7 +13,9 @@ import {SecurityService} from "../security/SecurityService";
   templateUrl: './aside.component.html',
   styleUrl: './aside.component.scss'
 })
+
 export class AsideComponent {
 
-  constructor(public keycloak: SecurityService) {}
-}
+  constructor(public keycloak: AuthService) {}
+
+  }

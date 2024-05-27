@@ -28,10 +28,6 @@ export class SecurityService {
     });
   }
 
-  logout() {
-    this.keycloakService.logout()
-  }
-
   public hasRoleIn(roles: string[]): boolean {
     let userRoles = this.keycloakService.getUserRoles();
     for (let role of roles) {

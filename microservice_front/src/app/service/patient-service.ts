@@ -1,5 +1,5 @@
-import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
+import {Injectable, OnInit} from "@angular/core";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Patient} from "../model/patient.model";
 import {Observable} from "rxjs";
 import {NewPatient} from "../model/newPatient.model";
@@ -21,8 +21,8 @@ export class PatientService {
     return this.http.get<Patient>(`http://localhost:9000/patient/${id}`)
   }
 
-  saveNewPatient(newPatient: NewPatient): Observable<Patient>{
-    return this.getAllPatients().pipe(switchMap => this.http.post<Patient>(`http://localhost:9000/patient/save`, newPatient));
+  saveNewPatient(newPatient: NewPatient): Observable<Patient> {
+    return this.getAllPatients().pipe(switchMap=> this.http.post<Patient>(`http://localhost:9000/patient/save`, newPatient));
   }
 
   updatePatient(updatePatient: UpdatePatient): Observable<Patient> {
