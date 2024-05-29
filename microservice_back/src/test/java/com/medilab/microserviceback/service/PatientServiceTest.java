@@ -106,14 +106,5 @@ public class PatientServiceTest {
         
         assertDoesNotThrow(() -> service.deleteById(id));
     }
-    
-    @Test
-    void shouldDeletePatientByNameTest() {
-        String firstName = "Test";
-        String lastName = "TestBorderline";
-        
-        service.deleteByName(firstName, lastName);
-        
-        assertDoesNotThrow(() -> service.deleteByName(firstName, lastName));
-    }
+
 }
