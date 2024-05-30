@@ -8,6 +8,7 @@ import {KeycloakAngularModule, KeycloakService} from "keycloak-angular";
 import {AuthService} from "./security/auth-service";
 import {initializeKeycloak} from "./security/keycloak-initializer";
 import {AuthInterceptor} from "./security/auth-Interceptor";
+import {Environment} from "../environments/environment";
 
 
 export const appConfig: ApplicationConfig = {

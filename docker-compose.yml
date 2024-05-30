@@ -2,13 +2,57 @@ version: '3.3'
 
 services:
 
+  keycloak-mysql:
+    container_name: keycloak-mysql
+    healthcheck:
+      test: mysqladmin ping -h localhost -u root -p$MYSQL_ROOT_PASSWORD
+      timeout: 20s
+      retries: 5
+    image: mysql:8.0
+    volumes:
+      - ./keycloak_mysql_data:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: keycloak
+      MYSQL_ROOT_PASSWORD: rootroot
+      MYSQL_USER: keycloak
+      MYSQL_PASSWORD: password
+      MYSQL_TCP_PORT: 8181
+    expose:
+      - 8181
+    ports:
+      - "8181:8181"
+
+  keycloak:
+    container_name: keycloak
+    healthcheck:
+      test: bash -c ':> /dev/tcp/localhost/8080'
+      interval: 3s
+      timeout: 10s
+      retries: 3
+    depends_on:
+      keycloak-mysql:
+        condition: service_healthy
+    image: quay.io/keycloak/keycloak:24.0.4
+    command: ["start-dev"]
+    environment:
+      DB_VENDOR: MYSQL
+      DB_ADDR: mysql
+      DB_URL_HOST: keycloak-mysql
+      DB_URL_DATABASE: keycloak
+      DB_PASSWORD: password
+      DB_USERNAME: keycloak
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+    expose:
+      - 8080
+    ports:
+      - "8080:8080"
+
+
   configuration-server:
     container_name: configuration-server
-#    healthcheck:
-#      test: curl --fail http://configuration-server:9101 || exit 1
-#      interval: 3s
-#      timeout: 30s
-#      retries: 3
+    healthcheck:
+      test: exit 0
     build:
       context: configuration_server
       dockerfile: Dockerfile
@@ -21,11 +65,10 @@ services:
   microservice-back-mysql:
     container_name: microservice-back-mysql
     image: mysql:8.0
-#    healthcheck:
-#      test: curl --fail http://microservice-back-mysql:9090 || exit 1
-#      interval: 3s
-#      timeout: 30s
-#      retries: 3
+    healthcheck:
+      test: mysqladmin ping -h localhost -u root -p$MYSQL_ROOT_PASSWORD
+      timeout: 20s
+      retries: 5
     restart: always
     expose:
       - 9090
@@ -38,15 +81,14 @@ services:
 
   eureka-server:
     container_name: eureka-server
-#    healthcheck:
-#       test: curl --fail http://eureka-server:9102/ || exit 1
-#       interval: 3s
-#       timeout: 30s
-#       retries: 3
+    healthcheck:
+       test: curl --fail http://eureka:password@localhost:9102 || exit 1
+       interval: 10s
+       timeout: 10s
+       retries: 3
     depends_on:
-#      configuration-server:
-#        condition: service_healthy
-      - configuration-server
+      configuration-server:
+        condition: service_healthy
     build:
       context: eureka_server
       dockerfile: Dockerfile
@@ -60,18 +102,48 @@ services:
       eureka.instance.hostname: eureka-server
       eureka.client.serviceUrl.defaultZone: http://eureka:password@localhost:9102/eureka
 
+  microservice-gateway:
+    container_name: microservice-gateway
+    healthcheck:
+      test: netstat -ltn | grep -c 9000 || exit 1
+      interval: 10s
+      timeout: 10s
+      retries: 3
+    depends_on:
+      configuration-server:
+        condition: service_healthy
+      keycloak:
+        condition: service_healthy
+    build:
+      context: microservice_gateway
+      dockerfile: Dockerfile
+    restart: always
+    expose:
+      - 9000
+    ports:
+      - "9000:9000"
+    environment:
+      spring.cloud.config.uri: http://configuration-server:9101
+      eureka.client.serviceUrl.defaultZone: http://eureka:password@eureka-server:9102/eureka
+      spring.security.oauth2.resourceserver.jwt.issuer-uri: http://keycloak:8080/realms/Medilabo-Solutions-realm
+      keycloak.auth.server-url: http://keycloak:8080/auth
+      keycloak.credentials.secret: a8Wy5weCZmerTicC215DWnLm7QOu0rTN
+
+
   microservice-back:
     container_name: microservice-back
+    healthcheck:
+      test: curl --fail http://localhost:9001/microservice_back/v1/patient/all || exit 1
+      interval: 20s
+      timeout: 30s
+      retries: 3
     depends_on:
-#      configuration-server:
-#        condition: service_healthy
-#      microservice-back-mysql:
-#        condition: service_healthy
-#      eureka-server:
-#        condition: service_healthy
-      - configuration-server
-      - microservice-back-mysql
-      - eureka-server
+      configuration-server:
+        condition: service_healthy
+      microservice-back-mysql:
+        condition: service_healthy
+      eureka-server:
+        condition: service_healthy
     build:
       context: microservice_back
       dockerfile: Dockerfile
@@ -89,4 +161,21 @@ services:
       spring.datasource.root.password: rootroot
       spring.jpa.database-platform: org.hibernate.dialect.MySQLDialect
 
-
+  microservice-front:
+    container_name: microservice-front
+    healthcheck:
+      test: curl --fail http://localhost:4200 || exit 1
+      interval: 20s
+      timeout: 30s
+      retries: 3
+    depends_on:
+      keycloak:
+        condition: service_healthy
+    build:
+      context: microservice_front
+      dockerfile: Dockerfile
+    restart: always
+    expose:
+      - 4200
+    ports:
+      - "4200:4200"
