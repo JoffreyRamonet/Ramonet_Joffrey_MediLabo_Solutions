@@ -15,7 +15,7 @@
   </properties>
 
   <modules>
-    <module>microservice_back</module>
+    <module>microservice_backend_patient</module>
     <module>microservice_gateway</module>
     <module>configuration_server</module>
   </modules>
