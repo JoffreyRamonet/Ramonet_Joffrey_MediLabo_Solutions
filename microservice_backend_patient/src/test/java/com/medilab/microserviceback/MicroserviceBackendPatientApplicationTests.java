@@ -12,7 +12,7 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @SpringBootTest
-class MicroserviceBackApplicationTests {
+class MicroserviceBackendPatientApplicationTests {
 
 	@Test
 	void contextLoads() {

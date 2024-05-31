@@ -24,7 +24,7 @@ import java.util.Optional;
 @RestController
 @AllArgsConstructor
 @Slf4j
-@RequestMapping("/microservice_back/v1/patient")
+@RequestMapping("/microservice_backend_patient/v1/patient")
 public class PatientController {
     
     private final PatientUseCase patientService;
@@ -47,8 +47,7 @@ public class PatientController {
             throw new DataNotFoundException("Patient not found");
         }
         log.debug("Patient found: " + patient.get()
-                .getID()
-                .toString());
+                .getID());
         return patient.get();
     }
     
@@ -56,8 +55,7 @@ public class PatientController {
     public Patient save(
             @RequestBody PatientSaveDto patient) throws PatientAlreadyExistException {
         log.debug("Patient parsed to save: " + patient.firstName() + " - " + patient.lastName() + " - " +
-                patient.birthDate() + " - " + patient.gender() + " - " + patient.address() + " - " +
-                patient.phone());
+                patient.birthDate() + " - " + patient.gender() + " - " + patient.address() + " - " + patient.phone());
         
         if(patientService.getByName(patient.firstName(), patient.lastName())
                 .isPresent()) {
@@ -72,12 +70,12 @@ public class PatientController {
             @RequestBody PatientUpdateDto patientUpdateDto) {
         
         log.debug("Patients to update: " + patientUpdateDto.firstName() + ", " + patientUpdateDto.lastName() +
-                "Patient's informations to update: " +
-                patientUpdateDto.gender() + " - " + patientUpdateDto.address() + " - " + patientUpdateDto.phone());
+                "Patient's informations to update: " + patientUpdateDto.gender() + " - " + patientUpdateDto.address() +
+                " - " + patientUpdateDto.phone());
         
         return patientService.update(patientUpdateDto);
     }
-
+    
     @Transactional
     @DeleteMapping("/delete/{id}")
     public void deleteById(
@@ -87,9 +85,8 @@ public class PatientController {
         if(patientService.getById(id)
                 .isEmpty()) {
             throw new DataNotFoundException("Patient not found");
+        } else {
+            patientService.deleteById(id);
         }
-        
-        patientService.deleteById(id);
     }
-
 }
