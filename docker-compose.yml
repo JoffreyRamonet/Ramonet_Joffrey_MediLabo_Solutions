@@ -68,6 +68,8 @@ services:
   microservice-back-mysql:
     container_name: microservice-back-mysql
     image: mysql:8.0
+    volumes:
+      - ./mysql_data:/var/lib/mysql
     healthcheck:
       test: mysqladmin ping -h localhost -u root -p$MYSQL_ROOT_PASSWORD
       timeout: 20s
@@ -81,6 +83,22 @@ services:
       MYSQL_DATABASE: medilabo_solutions
       MYSQL_ROOT_PASSWORD: rootroot
       MYSQL_TCP_PORT: 9090
+
+  microservice-back-mongodb:
+    container_name: microservice-back-mongodb
+    image: mongo:8.0.0-rc6-jammy
+    volumes:
+      - ./mongodb_data:/var/lib/mongodb
+#    healthcheck:
+#      test:
+    restart: always
+    expose:
+      - 9191
+    ports:
+      - "9191:9191"
+    environment:
+      MONGO_INITDB_ROOT_PASSWORD: rootroot
+      MONGO_INITDB_ROOT_USERNAME: root
 
   eureka-server:
     container_name: eureka-server

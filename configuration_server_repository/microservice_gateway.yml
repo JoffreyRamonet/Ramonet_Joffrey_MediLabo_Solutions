@@ -1,0 +1,33 @@
+server:
+  port: 9000
+
+spring:
+  cloud:
+    gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+        - AddResponseHeader=Access-Control-Allow-Origin, *
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowed-Origins: "https:localhost:4200, https:microservice-front:4200"
+            allowedHeaders:
+              - Content-Type
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - PATCH
+            
+      routes:
+      - id: microservice_backend_patient
+        uri: http://localhost:9001
+        predicates: Path=/patient/**
+        filters:
+          - PrefixPath=/microservice_backend_patient/v1
+      - id: microservice_backend_note
+        uri: http://localhost:9003
+        predicates: Path=/note/**
+        filters:
+          - PrefixPath=/microservice_backend_note/v1
