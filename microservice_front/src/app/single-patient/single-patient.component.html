@@ -10,8 +10,15 @@
   </div>
   <div class="link">
     <a routerLink="">Back to the patient list</a>
+    <button (click)="onNewNote()">Write a new note</button>
     <button (click)="onEditPatient()">Edit the patient's sheet</button>
     <button class="deleteButton" (click)="onDeletePatient()">Delete the patient's sheet</button>
   </div>
   </div>
 </div>
+
+<div class="patient-card-separation">
+<h2>Notes</h2>
+</div>
+
+<app-single-note *ngFor="let note of notes$ | async" [note]="note"></app-single-note>

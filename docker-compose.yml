@@ -84,21 +84,31 @@ services:
       MYSQL_ROOT_PASSWORD: rootroot
       MYSQL_TCP_PORT: 9090
 
+
+# ***** NOT WORKING YET *****
   microservice-back-mongodb:
     container_name: microservice-back-mongodb
-    image: mongo:8.0.0-rc6-jammy
+    image: mongo:latest
     volumes:
-      - ./mongodb_data:/var/lib/mongodb
+#      - mongodb-data:/data/db
+      - ./db/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
 #    healthcheck:
-#      test:
+#      test: echo 'db.runCommand("ping").ok' | mongosh localhost:9191/test --quiet
+#      timeout: 20s
+#      retries: 5
     restart: always
+    command:
+      - '--auth'
     expose:
       - 9191
     ports:
       - "9191:9191"
     environment:
-      MONGO_INITDB_ROOT_PASSWORD: rootroot
       MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootroot
+      MONGODB_DATABASE: notes
+      MONGODB_HOST_NAME: lcoalhost
+      MONGODB_PORT: 9191
 
   eureka-server:
     container_name: eureka-server
@@ -152,7 +162,7 @@ services:
       keycloak.credentials.secret: a8Wy5weCZmerTicC215DWnLm7QOu0rTN
 
 
-  microservice-back:
+  microservice-backend_patient:
     container_name: microservice-backend_patient
     healthcheck:
       test: curl --fail http://localhost:9001/microservice-backend_patient/v1/patient/all || exit 1
@@ -182,6 +192,29 @@ services:
       spring.datasource.password: rootroot
       spring.datasource.root.password: rootroot
       spring.jpa.database-platform: org.hibernate.dialect.MySQLDialect
+
+  microservice-backend-note:
+    container_name: microservice-backend-note
+    healthcheck:
+      test: curl --fail http://localhost:9003/microservice-backend-note/v1/note/all || exite 1
+      interval: 20s
+      timeout: 30s
+      retries: 3
+#    depends_on:
+#      - microservice-back-mongodb:
+#          condition: service_healthy
+    build:
+      context: microservice_backend_note
+      dockerfile: Dockerfile
+    restart: always
+    expose:
+      - 9003
+    ports:
+      - "9003:9003"
+    environment:
+#      spring.data.mongodb.host: microservice-back-mongodb
+      spring.cloud.config.uri: http://configuration-server:9101
+      eureka.client.serviceUrl.defaultZone: http://eureka:password@eureka-server:9102/eureka
 
   microservice-front:
     container_name: microservice-front
