@@ -1,4 +1,4 @@
-.patient-card {
+.note-card {
   box-sizing: border-box;
   width: 50%;
   margin: 20px auto;
@@ -6,28 +6,8 @@
   background-color: rgb(255, 217, 179, 0.2);
   box-shadow: 4px 4px 20px;
 
-  h2 {
-    text-align: center;
-    margin-bottom: 1em;
-  }
-
   b {
     font-weight: bold;
-  }
-}
-
-.patient-card-separation{
-  box-sizing: border-box;
-  width: 50%;
-  margin-top: 70px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 1px;
-  background-color: rgb(255, 217, 179, 0.2);
-  box-shadow: 4px 4px 20px;
-
-  h2 {
-    text-align: center;
   }
 }
 
@@ -38,13 +18,17 @@
   justify-content: space-between;
 }
 
+.note {
+  width: 70%;
+}
+
 .link {
   width: 13em;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
 
-  a, button {
+  button {
     font-size: 1em;
     width: 100%;
     text-align: center;
@@ -75,6 +59,6 @@
   a:hover{
     width: 150%;
     box-shadow: 10px 10px 20px black;
-  font-size: 1.5em;
+    font-size: 1.5em;
   }
 }

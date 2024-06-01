@@ -1,0 +1,13 @@
+<div class="new-patient-card">
+  <h2>Write a new note</h2>
+  <form [formGroup]="noteForm">
+    <div class="form-group">
+      <label for="note"></label>
+      <textarea type="text" id="note" formControlName="note" rows="10"></textarea>
+    </div>
+    <div class="action-button">
+      <button type="submit" (click)="onSubmitForm()" [disabled]="noteForm.invalid">Submit</button>
+      <button (click)="onReturn()">Back to the sheet</button>
+    </div>
+  </form>
+</div>

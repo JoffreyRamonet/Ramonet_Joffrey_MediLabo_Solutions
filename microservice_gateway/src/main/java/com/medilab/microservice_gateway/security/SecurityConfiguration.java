@@ -21,7 +21,7 @@ public class SecurityConfiguration {
         corsConfig.setAllowCredentials(true);
         corsConfig.applyPermitDefaultValues();
         corsConfig.setAllowedOrigins(List.of("http://localhost:4200", "http://localhost:4200/*"));
-        corsConfig.setAllowedMethods(List.of("GET","POST","OPTIONS","DELETE"));
+        corsConfig.setAllowedMethods(List.of("GET","POST","OPTIONS","DELETE", "PATCH"));
         corsConfig.setAllowedHeaders(List.of("*"));
         
         return http.csrf(ServerHttpSecurity.CsrfSpec::disable)

@@ -12,12 +12,16 @@ import {
 import {NewPatientComponent} from "./new-patient/new-patient.component";
 import {EditPatientComponent} from "./edit-patient/edit-patient.component";
 import {AuthGuard} from "./security/guard";
+import {EditNoteComponent} from "./edit-note/edit-note.component";
+import {NewNoteComponent} from "./new-note/new-note.component";
 
 export const routes: Routes = [
   { path: ``, component: PatientListComponent, canActivate: [AuthGuard]},
   { path: `patient/:id`, component: SinglePatientComponent},
-  { path: `new`, component: NewPatientComponent},
-  { path: `patient/edit/:id`, component: EditPatientComponent}
+  { path: `new/patient`, component: NewPatientComponent},
+  { path: `patient/edit/:id`, component: EditPatientComponent},
+  { path: `note/edit/:id`, component: EditNoteComponent},
+  { path: `new/note/:id`, component: NewNoteComponent}
 ];
 
 @NgModule({
