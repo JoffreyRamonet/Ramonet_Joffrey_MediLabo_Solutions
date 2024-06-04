@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public class PatientRepositoryStub implements PatientRepository {
     
-    private final DataStub data = new DataStub();
+    private final DataBaseStub data = new DataBaseStub();
     private final List<Patient> patients = data.getPatients();
     
     
