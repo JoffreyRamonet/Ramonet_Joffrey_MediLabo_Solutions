@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {Note} from "../model/note.model";
 import {Observable, tap} from 'rxjs';
-import {UpdateNote} from "../model/updateNote";
+import {UpdateNoteModel} from "../model/updateNote.model";
 import {NoteService} from "../service/note-service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AsyncPipe, DatePipe, NgIf} from "@angular/common";
@@ -29,7 +29,7 @@ export class EditNoteComponent implements OnInit {
 
   editForm!: FormGroup;
   note$!: Observable<Note>;
-  updateNote!: UpdateNote;
+  updateNote!: UpdateNoteModel;
   patientId!: string;
   id: string = this.route.snapshot.params['id'];
   noteId!: string;
@@ -53,7 +53,7 @@ export class EditNoteComponent implements OnInit {
     }
 
     onSubmitEditForm(): void {
-    this.updateNote = new UpdateNote(
+    this.updateNote = new UpdateNoteModel(
       this.noteId,
       this.editForm.value.note
     );

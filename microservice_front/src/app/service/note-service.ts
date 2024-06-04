@@ -2,8 +2,8 @@ import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {map, Observable} from "rxjs";
 import {Note} from "../model/note.model";
-import {NewNote} from "../model/newNote";
-import {UpdateNote} from "../model/updateNote";
+import {NewNoteModel} from "../model/newNote.model";
+import {UpdateNoteModel} from "../model/updateNote.model";
 
 @Injectable({
   providedIn: 'root'
@@ -24,11 +24,11 @@ export class NoteService{
     return this.http.get<Note[]>(`http://localhost:9000/note/patient/${id}`)
   }
 
-  saveNewNote(newNote: NewNote): Observable<Note>{
+  saveNewNote(newNote: NewNoteModel): Observable<Note>{
     return this.getAllNotes().pipe(switchMap => this.http.post<Note>('http://localhost:9000/note/save', newNote));
   }
 
-  updateNote(updateNote: UpdateNote): Observable<Note>{
+  updateNote(updateNote: UpdateNoteModel): Observable<Note>{
     return this.http.patch<Note>(`http://localhost:9000/note/update`, updateNote);
   }
 

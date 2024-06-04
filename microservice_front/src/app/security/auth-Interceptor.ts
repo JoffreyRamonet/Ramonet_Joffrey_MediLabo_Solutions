@@ -12,9 +12,10 @@ import {AuthService} from "./auth-service";
 export class AuthInterceptor implements HttpInterceptor {
 
   token!: null | string;
-
+  role!: string[];
   constructor(private authService: AuthService) {
     this.token = this.authService.token;
+    this.role = this.authService.getRoles();
   }
 
   intercept(
@@ -29,9 +30,7 @@ export class AuthInterceptor implements HttpInterceptor {
           'Accept': 'application/json',
           'Authorization': `Bearer ${this.token}`,
         }
-
       });
-      console.log("interceptor " + this.token)
       return next.handle(authReq);
     }
 

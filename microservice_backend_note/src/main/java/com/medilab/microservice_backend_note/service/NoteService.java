@@ -20,37 +20,48 @@ public class NoteService implements NoteUseCase {
     
     @Override
     public List<Note> getAll() {
+        
         List<Note> notes = repository.findAll();
         
-        log.debug("Notes list size: " + notes.size());
+        log.debug("NoteService - getAll - Notes list size: " + notes.size());
         
         return notes;
     }
     
     @Override
     public Optional<Note> getById(String id) {
-        return repository.findById(id);
+        
+        Optional<Note> note = repository.findById(id);
+        
+        log.debug("NoteService - getById - id parsed: " + id + "note is present: " + note.isPresent());
+        
+        return note;
     }
     
     @Override
     public List<Note> getByPatient(String id) {
+        
         List<Note> notes = repository.findByPatient(id);
         
-        log.debug("Notes list size: " + notes.size());
+        log.debug("NoteService - getByPatient - id parsed: " + id + "Notes list size: " + notes.size());
         
         return notes;
     }
     
     @Override
     public Note save(NoteDto noteDto) {
+        
         Note note = new Note(noteDto.patient(), noteDto.note());
+        
+        log.debug("NoteService - save - Note created: " + note.getId());
+        
         return repository.save(note);
     }
     
     @Override
     public Note update(NoteUpdateDto noteUpdateDto) {
         
-        log.debug("Note to update: " + noteUpdateDto.id() + ", information to update: " + noteUpdateDto.note());
+        log.debug("NoteService - update - Note to update: " + noteUpdateDto.id() + ", information to update: " + noteUpdateDto.note());
         
         Note noteFound = getById(noteUpdateDto.id()).get();
         
@@ -61,11 +72,17 @@ public class NoteService implements NoteUseCase {
     
     @Override
     public void deleteById(String id) {
+        
+        log.debug("NoteService - deleteById - Id to delete: " + id);
+        
         repository.deleteById(id);
     }
     
     @Override
     public void deleteByPatient(String id) {
+        
+        log.debug("NoteService - deleteByPatient - Id to delete: " + id);
+        
         repository.deleteByPatient(id);
     }
 }

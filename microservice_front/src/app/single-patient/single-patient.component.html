@@ -1,3 +1,5 @@
+<div class="all-patient-card">
+
 <div class="patient-card" *ngIf="patient$ | async as patient">
   <h2>Fiche Patient</h2>
   <div class="sheet">
@@ -22,3 +24,5 @@
 </div>
 
 <app-single-note *ngFor="let note of notes$ | async" [note]="note"></app-single-note>
+
+</div>
