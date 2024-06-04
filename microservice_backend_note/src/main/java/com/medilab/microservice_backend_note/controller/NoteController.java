@@ -29,9 +29,11 @@ public class NoteController {
     
     @GetMapping("/all")
     public List<Note> getAll() {
+        
         List<Note> notes = noteService.getAll();
         
-        log.debug("Notes list size: " + notes.size());
+        log.debug("NoteController - getAll - Notes list size: " + notes.size());
+        
         return notes;
     }
     
@@ -39,13 +41,16 @@ public class NoteController {
     public Note getById(
             @PathVariable
             final String id) {
+        
         Optional<Note> note = noteService.getById(id);
         
         if(note.isEmpty()) {
             throw new DataNotFoundException("Note not found");
         }
-        log.debug("Note found: " + note.get()
-                .getId());
+        
+        log.debug("NoteController - getById - id parsed: " + id);
+        
+        
         return note.get();
     }
     
@@ -53,9 +58,11 @@ public class NoteController {
     public List<Note> getByPatient(
             @PathVariable
             final String id) {
+        
         List<Note> notes = noteService.getByPatient(id);
         
-        log.debug("Notes list size: " + notes.size());
+        log.debug("NoteController - getByPatient - id parsed: " + id + "Notes list size: " + notes.size());
+        
         
         return notes;
     }
@@ -64,7 +71,8 @@ public class NoteController {
     public Note save(
             @RequestBody
             final NoteDto noteDto) {
-        log.debug("Notes parsed to save: " + noteDto.patient() + " - " + noteDto.note());
+        
+        log.debug("NoteController - save - Notes parsed to save: " + noteDto.patient() + " - " + noteDto.note());
         
         return noteService.save(noteDto);
     }
@@ -73,7 +81,8 @@ public class NoteController {
     public Note update(
             @RequestBody
             final NoteUpdateDto noteUpdateDto) {
-        log.debug("Note to update: " + noteUpdateDto.id() + ", note: " + noteUpdateDto.note());
+        
+        log.debug("NoteController - update - Note to update: " + noteUpdateDto.id() + ", information to update: " + noteUpdateDto.note());
         
         return noteService.update(noteUpdateDto);
     }
@@ -82,11 +91,13 @@ public class NoteController {
     public void deleteById(
             @PathVariable
             final String id) {
-        log.debug(id);
+        
         if(noteService.getById(id)
                 .isEmpty()) {
             throw new DataNotFoundException("Note not found");
         } else {
+            
+            log.debug("NoteController - deleteById - Id to delete: " + id);
             noteService.deleteById(id);
         }
     }
@@ -95,12 +106,13 @@ public class NoteController {
     public void deleteByPatient(
             @PathVariable
             final String id) {
-        log.debug(id);
         
         if(noteService.getByPatient(id)
                 .isEmpty()) {
             throw new DataNotFoundException("Notes of patient'id : " + id + " not found");
         } else {
+            
+            log.debug("NoteController - deleteByPatient - Id to delete: " + id);
             noteService.deleteByPatient(id);
         }
     }

@@ -9,10 +9,9 @@
       {{ note.note }}
     </p>
     </div>
-    <h3>New note</h3>
     <div class="editForm">
       <label for="note"></label>
-      <textarea type="text" id="note" formControlName="note" rows="10"></textarea>
+      <textarea type="text" id="note" formControlName="note" rows="10" placeholder="New note"></textarea>
     </div>
     <div class="action-button">
       <button type="submit" (click)="onSubmitEditForm()">Submit</button>

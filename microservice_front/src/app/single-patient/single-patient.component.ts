@@ -12,6 +12,8 @@ import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 import {SingleNoteComponent} from "../single-note/single-note.component";
 import {Note} from "../model/note.model";
 import {NoteService} from "../service/note-service";
+import {AsideComponent} from "../aside/aside.component";
+import {RiskAsideComponent} from "../risk-aside/risk-aside.component";
 
 @Component({
   selector: 'app-single-patient',
@@ -21,7 +23,9 @@ import {NoteService} from "../service/note-service";
     RouterLink,
     NgIf,
     SingleNoteComponent,
-    NgForOf
+    NgForOf,
+    AsideComponent,
+    RiskAsideComponent
   ],
   templateUrl: './single-patient.component.html',
   styleUrl: './single-patient.component.scss'
@@ -33,6 +37,7 @@ export class SinglePatientComponent {
   id: string = this.route.snapshot.params['id'];
 
   constructor(private patientService: PatientService, private noteService: NoteService, private router: Router, private route: ActivatedRoute) {
+
   }
 
   ngOnInit(): void {

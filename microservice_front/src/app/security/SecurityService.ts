@@ -1,13 +1,16 @@
 import {Injectable} from "@angular/core";
 import {KeycloakProfile} from "keycloak-js";
 import {KeycloakEventType, KeycloakService} from "keycloak-angular";
+import {AuthService} from "./auth-service";
 
 @Injectable({providedIn: "root"})
 export class SecurityService {
   public profile?: KeycloakProfile;
+  role!: string[];
 
-  constructor(public keycloakService: KeycloakService) {
+  constructor(public keycloakService: KeycloakService, private auth: AuthService) {
     this.init();
+    this.role = this.auth.getRoles();
   }
 
   init() {
@@ -28,11 +31,8 @@ export class SecurityService {
     });
   }
 
-  public hasRoleIn(roles: string[]): boolean {
-    let userRoles = this.keycloakService.getUserRoles();
-    for (let role of roles) {
-      if (userRoles.includes(role)) return true;
-    }
-    return false;
+  public isAdmin(): boolean {
+    return (this.role.includes('ADMIN'))
+
   }
 }

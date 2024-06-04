@@ -10,7 +10,7 @@
     </parent>
 
     <groupId>com.medilab</groupId>
-    <artifactId>microservice_backend_note</artifactId>
+    <artifactId>microservice-backend-note</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <name>microservice_backend_note</name>

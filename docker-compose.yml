@@ -1,22 +1,22 @@
-version: '3.3'
+version: '3.8'
 
 services:
 
   keycloak-mysql:
     container_name: keycloak-mysql
+    restart: on-failure
     healthcheck:
       test: mysqladmin ping -h localhost -u root -p$MYSQL_ROOT_PASSWORD
       timeout: 20s
       retries: 5
     image: mysql:8.0
     volumes:
-      - ./keycloak_mysql_data:/var/lib/mysql
+      - ./keycloak_mysql_data:/var/lib/mysql-keycloak
     environment:
       MYSQL_DATABASE: keycloak
       MYSQL_ROOT_PASSWORD: rootroot
       MYSQL_USER: keycloak
       MYSQL_PASSWORD: password
-      MYSQL_TCP_PORT: 8181
     expose:
       - 8181
     ports:
@@ -24,6 +24,7 @@ services:
 
   keycloak:
     container_name: keycloak
+    restart: on-failure
     healthcheck:
       test: bash -c ':> /dev/tcp/localhost/8080'
       interval: 3s
@@ -44,7 +45,7 @@ services:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
 #
-      KEYCLOAK_FRONTEND_URL: https://localhost:8080/auth/
+#      KEYCLOAK_FRONTEND_URL: https://localhost:8080/auth/
 #
     expose:
       - 8080
@@ -100,15 +101,15 @@ services:
     command:
       - '--auth'
     expose:
-      - 9191
+      - 27017
     ports:
-      - "9191:9191"
+      - "27017:27017"
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: rootroot
       MONGODB_DATABASE: notes
-      MONGODB_HOST_NAME: lcoalhost
-      MONGODB_PORT: 9191
+      MONGODB_HOST_NAME: localhost
+      MONGODB_PORT: 27017
 
   eureka-server:
     container_name: eureka-server
@@ -177,7 +178,7 @@ services:
       eureka-server:
         condition: service_healthy
     build:
-      context: microservice-backend_patient
+      context: microservice_backend_patient
       dockerfile: Dockerfile
     restart: always
     expose:
@@ -193,28 +194,28 @@ services:
       spring.datasource.root.password: rootroot
       spring.jpa.database-platform: org.hibernate.dialect.MySQLDialect
 
-  microservice-backend-note:
-    container_name: microservice-backend-note
-    healthcheck:
-      test: curl --fail http://localhost:9003/microservice-backend-note/v1/note/all || exite 1
-      interval: 20s
-      timeout: 30s
-      retries: 3
-#    depends_on:
-#      - microservice-back-mongodb:
-#          condition: service_healthy
-    build:
-      context: microservice_backend_note
-      dockerfile: Dockerfile
-    restart: always
-    expose:
-      - 9003
-    ports:
-      - "9003:9003"
-    environment:
-#      spring.data.mongodb.host: microservice-back-mongodb
-      spring.cloud.config.uri: http://configuration-server:9101
-      eureka.client.serviceUrl.defaultZone: http://eureka:password@eureka-server:9102/eureka
+#  microservice-backend-note:
+#    container_name: microservice-backend-note
+#    healthcheck:
+#      test: curl --fail http://localhost:9003/microservice-backend-note/v1/note/all || exite 1
+#      interval: 20s
+#      timeout: 30s
+#      retries: 3
+##    depends_on:
+##      - microservice-back-mongodb:
+##          condition: service_healthy
+#    build:
+#      context: microservice_backend_note
+#      dockerfile: Dockerfile
+#    restart: always
+#    expose:
+#      - 9003
+#    ports:
+#      - "9003:9003"
+#    environment:
+##      spring.data.mongodb.host: microservice-back-mongodb
+#      spring.cloud.config.uri: http://configuration-server:9101
+#      eureka.client.serviceUrl.defaultZone: http://eureka:password@eureka-server:9102/eureka
 
   microservice-front:
     container_name: microservice-front

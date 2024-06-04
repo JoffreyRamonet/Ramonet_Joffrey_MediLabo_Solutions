@@ -1,6 +1,7 @@
 package com.medilab.microservice_backend_note.repository;
 
 import com.medilab.microservice_backend_note.model.Note;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -8,9 +9,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
+@AllArgsConstructor
 public class NoteRepositoryImpl implements NoteRepository {
     
-    @Autowired
     private ClientMongoDb repository;
     
     @Override
