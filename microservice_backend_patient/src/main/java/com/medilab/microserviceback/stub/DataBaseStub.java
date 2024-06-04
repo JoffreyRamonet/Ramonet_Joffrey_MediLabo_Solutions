@@ -5,7 +5,7 @@ import com.medilab.microserviceback.model.Patient;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class DataStub {
+public final class DataBaseStub {
     
     private final List<Patient> persons = new ArrayList<>(List.of(
            new Patient("73052162-5644-47c6-a76e-a3e6ee17eedb", "TestNone", "Test", "1966-12-31 ", "F", "1 Brookside St", "100-222-3333"),

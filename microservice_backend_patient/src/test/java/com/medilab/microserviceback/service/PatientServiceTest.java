@@ -4,28 +4,20 @@ import com.medilab.microserviceback.dto.PatientSaveDto;
 import com.medilab.microserviceback.dto.PatientUpdateDto;
 import com.medilab.microserviceback.model.Patient;
 import com.medilab.microserviceback.stub.PatientRepositoryStub;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
+
 public class PatientServiceTest {
     
     
-    private PatientRepositoryStub repository;
-    private PatientService service;
+    private final PatientRepositoryStub repository = new PatientRepositoryStub();;
+    private final PatientService service = new PatientService(repository);
     
-    
-    @BeforeEach
-    void setUp() {
-        repository = new PatientRepositoryStub();
-        service = new PatientService(repository);
-    }
     
     @Test
     void shouldReturnAllPatientsTest() {

@@ -41,6 +41,10 @@ public class PatientService implements PatientUseCase {
     public Patient save(PatientSaveDto patientSaveDto) {
         Patient patient = new Patient(patientSaveDto.lastName(), patientSaveDto.firstName(), patientSaveDto.birthDate(),
                 patientSaveDto.gender(), patientSaveDto.address(), patientSaveDto.phone());
+        
+        if(!birthdateFormatValidator(patientSaveDto.birthDate())){
+            throw new RuntimeException();
+        }
         return repository.save(patient);
     }
     
@@ -54,7 +58,7 @@ public class PatientService implements PatientUseCase {
         Patient patientFound = getByName(patientUpdateDto.firstName(), patientUpdateDto.lastName()).get();
         
         log.debug(patientFound.getID()
-                .toString() + " -  " + patientFound.getFirstName() + " - " + patientFound.getLastName() + " - " +
+                 + " -  " + patientFound.getFirstName() + " - " + patientFound.getLastName() + " - " +
                 patientFound.getAddress() + " - " + patientFound.getGender() + " - " + patientFound.getBirthDate() +
                 " - " + patientFound.getPhone());
         
@@ -78,5 +82,9 @@ public class PatientService implements PatientUseCase {
         
         log.debug("Patient's id to delete: " + id);
         repository.deleteById(id);
+    }
+    
+    private Boolean birthdateFormatValidator(String birthdate){
+        return birthdate.matches("(((20[012]\\d|19\\d\\d)|(1\\d|2[0123]))-((0[0-9])|(1[012]))-((0[1-9])|([12][0-9])|(3[01])))");
     }
 }
