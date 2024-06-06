@@ -7,7 +7,13 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-
+/**
+ * Implement the TriggerRepository.
+ * Forwards requests to ClientMySql to query the MySQL database.
+ *
+ * @see TriggerRepository
+ * @see ClientMySql
+ */
 @Repository
 @AllArgsConstructor
 public class TriggerRepositoryImpl implements TriggerRepository {

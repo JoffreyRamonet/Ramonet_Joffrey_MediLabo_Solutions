@@ -7,9 +7,16 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+/**
+ * Implement the NoteClient.
+ * Use MicroserviceNoteProxy to query the microservice-backend-note.
+ *
+ * @see NoteClient
+ * @see MicroserviceNoteProxy
+ */
 @Component
 @AllArgsConstructor
-public class NoteClientImpl implements NoteClient{
+public class NoteClientImpl implements NoteClient {
     
     private MicroserviceNoteProxy proxy;
     

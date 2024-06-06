@@ -5,6 +5,10 @@ import com.medilab.microservice_backend_assessor.microservice_client.NoteClient;
 
 import java.util.List;
 
+/**
+ * Mock the note client for tests.
+ * Get all data from DataBaseStub and use the List<NoteBean> like the proxy.
+ */
 public class NoteClientImplStub implements NoteClient {
     
     private final DataBaseStub dataBaseStub = new DataBaseStub();
@@ -12,6 +16,9 @@ public class NoteClientImplStub implements NoteClient {
     
     @Override
     public List<NoteBean> getNotesByPatientId(String id) {
-        return notes.stream().filter(note -> note.patient().equals(id)).toList();
+        return notes.stream()
+                .filter(note -> note.patient()
+                        .equals(id))
+                .toList();
     }
 }

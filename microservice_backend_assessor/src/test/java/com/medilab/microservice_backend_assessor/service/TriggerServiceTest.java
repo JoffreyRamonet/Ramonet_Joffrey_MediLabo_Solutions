@@ -42,19 +42,18 @@ class TriggerServiceTest {
     
     @Test
     void saveShouldSaveANewTriggerTest() throws TriggerAlreadyExistException {
-        NewTriggerDto newTriggerDto = new NewTriggerDto();
-        newTriggerDto.setName("Test");
+        NewTriggerDto newTriggerDto = new NewTriggerDto("Test");
         
         Trigger result = service.save(newTriggerDto);
         
-        assertEquals(newTriggerDto.getName(), result.getName());
+        assertEquals(newTriggerDto.name(), result.getName());
         repository.delete(result.getId());
     }
     
     @Test
     void saveShouldReturnAnExceptionTest(){
-        NewTriggerDto newTriggerDto = new NewTriggerDto();
-        newTriggerDto.setName("Fumeur");
+        NewTriggerDto newTriggerDto = new NewTriggerDto("Fumeur");
+
         
         TriggerAlreadyExistException triggerAlreadyExistException = assertThrows(TriggerAlreadyExistException.class, () -> service.save(newTriggerDto));
         

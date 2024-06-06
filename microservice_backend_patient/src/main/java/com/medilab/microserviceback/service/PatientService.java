@@ -11,7 +11,16 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-
+/**
+ * The PatientService is the main class of the microservice-backend-patient that perform business treatments.
+ * <p>
+ * Implement the PatientUseCase.
+ *
+ * @see PatientUseCase
+ * Requires a PatientRepository class to request the database.
+ * @see PatientRepository
+ * </p>
+ */
 @Service
 @AllArgsConstructor
 @Slf4j
@@ -42,7 +51,7 @@ public class PatientService implements PatientUseCase {
         Patient patient = new Patient(patientSaveDto.lastName(), patientSaveDto.firstName(), patientSaveDto.birthDate(),
                 patientSaveDto.gender(), patientSaveDto.address(), patientSaveDto.phone());
         
-        if(!birthdateFormatValidator(patientSaveDto.birthDate())){
+        if(!birthdateFormatValidator(patientSaveDto.birthDate())) {
             throw new RuntimeException();
         }
         return repository.save(patient);
@@ -57,10 +66,9 @@ public class PatientService implements PatientUseCase {
         
         Patient patientFound = getByName(patientUpdateDto.firstName(), patientUpdateDto.lastName()).get();
         
-        log.debug(patientFound.getID()
-                 + " -  " + patientFound.getFirstName() + " - " + patientFound.getLastName() + " - " +
-                patientFound.getAddress() + " - " + patientFound.getGender() + " - " + patientFound.getBirthDate() +
-                " - " + patientFound.getPhone());
+        log.debug(patientFound.getID() + " -  " + patientFound.getFirstName() + " - " + patientFound.getLastName() +
+                " - " + patientFound.getAddress() + " - " + patientFound.getGender() + " - " +
+                patientFound.getBirthDate() + " - " + patientFound.getPhone());
         
         if(patientUpdateDto.gender() != null) {
             patientFound.setGender(patientUpdateDto.gender());
@@ -84,7 +92,15 @@ public class PatientService implements PatientUseCase {
         repository.deleteById(id);
     }
     
-    private Boolean birthdateFormatValidator(String birthdate){
-        return birthdate.matches("(((20[012]\\d|19\\d\\d)|(1\\d|2[0123]))-((0[0-9])|(1[012]))-((0[1-9])|([12][0-9])|(3[01])))");
+    /**
+     * Method to verify the format of the birthdate before call the repository to save a new patient.
+     * Format: yyyy-MM-dd who yyyy should be between 19yy and 202y.
+     *
+     * @param birthdate - String - the birthdate of the NewPatientDto.
+     * @return - Boolean - true if the format is respected and false if is not.
+     */
+    private Boolean birthdateFormatValidator(String birthdate) {
+        return birthdate.matches(
+                "(((20[012]\\d|19\\d\\d)|(1\\d|2[0123]))-((0[0-9])|(1[012]))-((0[1-9])|([12][0-9])|(3[01])))");
     }
 }

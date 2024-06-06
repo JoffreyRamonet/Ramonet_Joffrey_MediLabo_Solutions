@@ -7,6 +7,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+/**
+ * Mock the repository for tests.
+ * Get all data from DataBaseStub and use the List<Trigger> like the database.
+ */
 public class TriggerRepositoryImplStub implements TriggerRepository {
     
     private DataBaseStub dataBaseStub = new DataBaseStub();

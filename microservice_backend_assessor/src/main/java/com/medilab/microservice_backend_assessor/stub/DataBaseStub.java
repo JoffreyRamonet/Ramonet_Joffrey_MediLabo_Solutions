@@ -8,6 +8,9 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.List;
 
+/**
+ * Mock of the database for tests.
+ */
 public final class DataBaseStub {
     
     private final List<PatientBean> patientBeanList =

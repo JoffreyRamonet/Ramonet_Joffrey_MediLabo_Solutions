@@ -19,6 +19,30 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The main controller of the microservice-backend-note, expose all endpoints.
+ * <p>
+ * Use GET - POST - PATCH - DELETE http requests.
+ * The default url to call the controller is:
+ * {@snippet lang = "Properties"}:
+ * "/microservice_backend_note/v1/note"
+ * </p>
+ * <p>
+ * Requests return Notes(s) model.
+ *
+ * @see Note
+ * Requests require NoteDto to save a new note in the database.
+ * @see NoteDto
+ * Requests require NoteUpdateDto to modify a note in the database.
+ * @see NoteUpdateDto
+ * Require a NoteUseCase to apply business treatments and receive data.
+ * @see NoteUseCase
+ * </p>
+ * <p>
+ * Requests can throw exceptions if the note is not found.
+ * @see DataNotFoundException
+ * </p>
+ */
 @RestController
 @AllArgsConstructor
 @Slf4j
@@ -50,7 +74,6 @@ public class NoteController {
         
         log.debug("NoteController - getById - id parsed: " + id);
         
-        
         return note.get();
     }
     
@@ -62,7 +85,6 @@ public class NoteController {
         List<Note> notes = noteService.getByPatient(id);
         
         log.debug("NoteController - getByPatient - id parsed: " + id + "Notes list size: " + notes.size());
-        
         
         return notes;
     }
@@ -82,7 +104,8 @@ public class NoteController {
             @RequestBody
             final NoteUpdateDto noteUpdateDto) {
         
-        log.debug("NoteController - update - Note to update: " + noteUpdateDto.id() + ", information to update: " + noteUpdateDto.note());
+        log.debug("NoteController - update - Note to update: " + noteUpdateDto.id() + ", information to update: " +
+                noteUpdateDto.note());
         
         return noteService.update(noteUpdateDto);
     }
@@ -102,6 +125,11 @@ public class NoteController {
         }
     }
     
+    /**
+     * This version of delete is use to delete all patient's notes.
+     *
+     * @param id - String - The patient's id.
+     */
     @DeleteMapping("/patient/delete/{id}")
     public void deleteByPatient(
             @PathVariable

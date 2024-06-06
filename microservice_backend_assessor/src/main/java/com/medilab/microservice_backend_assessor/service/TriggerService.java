@@ -46,11 +46,11 @@ public class TriggerService implements TriggerUseCase {
                 .stream()
                 .map(Trigger::getName)
                 .toList()
-                .contains(newTriggerDto.getName())) {
+                .contains(newTriggerDto.name())) {
             throw new TriggerAlreadyExistException("This trigger already Exist");
         } else {
             
-            Trigger newTrigger = new Trigger(upperCaseCheck(newTriggerDto.getName()));
+            Trigger newTrigger = new Trigger(upperCaseCheck(newTriggerDto.name()));
             log.debug("TriggerService - save - Note created: " + newTrigger.getId());
             
             return repository.save(newTrigger);

@@ -28,7 +28,7 @@ public class AccessorControllerTest {
     private final RiskCalculator riskCalculator = new RiskCalculator(patientClient, triggerCounter, ageCalculator);
    
     @InjectMocks
-    private final AccessorController controller = new AccessorController(riskCalculator);
+    private final AssessorController controller = new AssessorController(riskCalculator);
     
     private MockMvc mvc;
     
