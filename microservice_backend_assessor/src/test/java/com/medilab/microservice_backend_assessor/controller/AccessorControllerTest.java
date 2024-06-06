@@ -41,7 +41,7 @@ public class AccessorControllerTest {
     void shouldReturnTheRiskResultTest() throws Exception {
         String id = "73052162-5644-47c6-a76e-a3e6ee17eedb";
         
-        mvc.perform(get("/microservice_backend_accessor/v1/accessor/{id}", id))
+        mvc.perform(get("/microservice_backend_assessor/v1/assessor/{id}", id))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.result").value("none"))
                 .andDo(print());

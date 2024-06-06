@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/microservice_backend_accessor/v1/accessor")
+@RequestMapping("/microservice_backend_assessor/v1/trigger")
 @AllArgsConstructor
 @Slf4j
 public class TriggerController {
@@ -29,7 +29,7 @@ public class TriggerController {
 
     private TriggerService service;
 
-    @GetMapping("/trigger/all")
+    @GetMapping("/all")
     public List<Trigger> getAll(){
         
         List<Trigger> triggers = service.getAll();
@@ -39,7 +39,7 @@ public class TriggerController {
         return triggers;
     }
     
-    @GetMapping("/trigger/{id}")
+    @GetMapping("/{id}")
     public Trigger getById(@PathVariable final String id){
         
         Optional<Trigger> trigger = service.getById(id);
@@ -53,7 +53,7 @@ public class TriggerController {
         return trigger.get();
     }
     
-    @PostMapping("/trigger/save")
+    @PostMapping("/save")
     public Trigger save(@RequestBody final NewTriggerDto newTriggerDto) throws TriggerAlreadyExistException {
         
         log.debug("TriggerController - save - Notes parsed to save: " + newTriggerDto.name());
@@ -61,7 +61,7 @@ public class TriggerController {
         return service.save(newTriggerDto);
     }
     
-    @PatchMapping("/trigger/update")
+    @PatchMapping("/update")
     public Trigger update(@RequestBody final UpdateTriggerDto updateTriggerDto) {
         
         log.debug("NoteController - update - Note to update: " + updateTriggerDto.id() + ", information to update: " + updateTriggerDto.name());
@@ -69,7 +69,7 @@ public class TriggerController {
         return service.update(updateTriggerDto);
     }
     
-    @DeleteMapping("/trigger/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteById(@PathVariable final String id){
         
         log.debug("NoteController - deleteById - Id to delete: " + id);

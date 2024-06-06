@@ -7,15 +7,3 @@
  * DiscoveryService by the microservice-eureka
  * </p>
  */
-module microservice.backend.note {
-    requires jakarta.validation;
-    requires static lombok;
-    requires spring.beans;
-    requires spring.boot;
-    requires spring.boot.autoconfigure;
-    requires spring.cloud.commons;
-    requires spring.context;
-    requires spring.data.commons;
-    requires spring.data.mongodb;
-    requires spring.web;
-}

@@ -8,14 +8,3 @@
  * DiscoveryService by the microservice-eureka
  * </p>
  */
-module microservice.backend.assessor {
-    requires jakarta.persistence;
-    requires static lombok;
-    requires spring.boot;
-    requires spring.boot.autoconfigure;
-    requires spring.cloud.commons;
-    requires spring.cloud.openfeign.core;
-    requires spring.context;
-    requires spring.data.jpa;
-    requires spring.web;
-}

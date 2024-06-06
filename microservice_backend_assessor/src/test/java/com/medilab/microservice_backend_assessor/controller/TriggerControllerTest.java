@@ -32,6 +32,7 @@ public class TriggerControllerTest {
     
     private ObjectMapper objectMapper;
     
+    private final String URL = "/microservice_backend_assessor/v1/trigger";
     
     @BeforeEach
     public void setup() {
@@ -45,7 +46,7 @@ public class TriggerControllerTest {
         int size = repository.findAll()
                 .size();
         
-        mvc.perform(get("/microservice_backend_accessor/v1/accessor/trigger/all"))
+        mvc.perform(get(URL + "/all"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.size()").value(size))
                 .andDo(print());
@@ -56,7 +57,7 @@ public class TriggerControllerTest {
         String id = "73052162-5644-47c6-a76e-a3e6ee17eedb";
         String name = "Hémoglobine A1C";
         
-        mvc.perform(get("/microservice_backend_accessor/v1/accessor/trigger/{id}", id))
+        mvc.perform(get(URL + "/{id}", id))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(id))
                 .andExpect(jsonPath("$.name").value(name))
@@ -68,7 +69,7 @@ public class TriggerControllerTest {
         NewTriggerDto newTriggerDto = new NewTriggerDto("test");
         
         mvc.perform(
-                        post("/microservice_backend_accessor/v1/accessor/trigger/save").contentType(MediaType.APPLICATION_JSON)
+                        post(URL + "/save").contentType(MediaType.APPLICATION_JSON)
                                 .content(objectMapper.writeValueAsString(newTriggerDto)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("Test"))
@@ -79,7 +80,7 @@ public class TriggerControllerTest {
     public void shouldUpdateATriggerTest() throws Exception {
         UpdateTriggerDto updateTriggerDto = new UpdateTriggerDto("90289de5-9084-4clp-8dec-f7c58669b875", "Boit");
         
-        mvc.perform(patch("/microservice_backend_accessor/v1/accessor/trigger/update").contentType(
+        mvc.perform(patch(URL + "/update").contentType(
                                 MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(updateTriggerDto)))
                 .andExpect(status().isOk())
@@ -91,7 +92,7 @@ public class TriggerControllerTest {
     public void shouldDeleteATriggerTest() throws Exception {
         String id = "90289de5-9084-4clp-8dec-f7c58669b875";
         
-        mvc.perform(delete("/microservice_backend_accessor/v1/accessor/trigger/delete/{id}", id))
+        mvc.perform(delete(URL + "/delete/{id}", id))
                 .andExpect(status().isOk())
                 .andDo(print());
     }
