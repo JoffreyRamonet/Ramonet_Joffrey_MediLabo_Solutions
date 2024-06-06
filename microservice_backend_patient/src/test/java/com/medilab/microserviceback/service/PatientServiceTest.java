@@ -3,6 +3,7 @@ package com.medilab.microserviceback.service;
 import com.medilab.microserviceback.dto.PatientSaveDto;
 import com.medilab.microserviceback.dto.PatientUpdateDto;
 import com.medilab.microserviceback.model.Patient;
+import com.medilab.microserviceback.stub.NoteClientImplStub;
 import com.medilab.microserviceback.stub.PatientRepositoryStub;
 import org.junit.jupiter.api.Test;
 
@@ -15,8 +16,9 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PatientServiceTest {
     
     
-    private final PatientRepositoryStub repository = new PatientRepositoryStub();;
-    private final PatientService service = new PatientService(repository);
+    private final PatientRepositoryStub repository = new PatientRepositoryStub();
+    private final NoteClientImplStub client = new NoteClientImplStub();
+    private final PatientService service = new PatientService(repository, client);
     
     
     @Test

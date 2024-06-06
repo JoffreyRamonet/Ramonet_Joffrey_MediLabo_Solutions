@@ -7,12 +7,3 @@
  * DiscoveryService by the microservice-eureka
  * </p>
  */
-module microservice.gateway {
-    requires spring.boot;
-    requires spring.boot.autoconfigure;
-    requires spring.cloud.commons;
-    requires spring.context;
-    requires spring.security.config;
-    requires spring.security.web;
-    requires spring.web;
-}

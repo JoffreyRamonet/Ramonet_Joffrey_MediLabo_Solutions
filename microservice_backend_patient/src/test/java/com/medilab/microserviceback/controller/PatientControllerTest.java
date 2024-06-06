@@ -3,8 +3,10 @@ package com.medilab.microserviceback.controller;
 import com.medilab.microserviceback.dto.PatientSaveDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.medilab.microserviceback.dto.PatientUpdateDto;
+import com.medilab.microserviceback.microservice_client.NoteClientImpl;
 import com.medilab.microserviceback.model.Patient;
 import com.medilab.microserviceback.service.PatientService;
+import com.medilab.microserviceback.stub.NoteClientImplStub;
 import com.medilab.microserviceback.stub.PatientRepositoryStub;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,7 +28,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class PatientControllerTest {
     
     private final PatientRepositoryStub repository = new PatientRepositoryStub();
-    private final PatientService service = new PatientService(repository);
+    private final NoteClientImplStub client = new NoteClientImplStub();
+    private final PatientService service = new PatientService(repository, client);
     
     @InjectMocks
     private final PatientController controller = new PatientController(service);

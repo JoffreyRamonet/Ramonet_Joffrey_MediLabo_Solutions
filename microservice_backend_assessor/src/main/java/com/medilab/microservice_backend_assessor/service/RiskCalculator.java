@@ -24,9 +24,9 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class RiskCalculator {
     
-    private PatientClient patientClient;
-    private TriggerCounter triggerCounter;
-    private AgeCalculator ageCalculator;
+    private final PatientClient patientClient;
+    private final TriggerCounter triggerCounter;
+    private final AgeCalculator ageCalculator;
     
     /**
      * The method to perform the risk calculation.

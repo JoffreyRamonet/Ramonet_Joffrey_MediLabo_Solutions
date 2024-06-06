@@ -2,6 +2,7 @@ package com.medilab.microserviceback.service;
 
 import com.medilab.microserviceback.dto.PatientSaveDto;
 import com.medilab.microserviceback.dto.PatientUpdateDto;
+import com.medilab.microserviceback.microservice_client.NoteClient;
 import com.medilab.microserviceback.model.Patient;
 import com.medilab.microserviceback.repository.PatientRepository;
 import lombok.AllArgsConstructor;
@@ -15,10 +16,11 @@ import java.util.Optional;
  * The PatientService is the main class of the microservice-backend-patient that perform business treatments.
  * <p>
  * Implement the PatientUseCase.
- *
  * @see PatientUseCase
  * Requires a PatientRepository class to request the database.
  * @see PatientRepository
+ * Requires a ClientName to delete all patient's notes when it needs to be deleted from the database.
+ * @see NoteClient
  * </p>
  */
 @Service
@@ -27,6 +29,7 @@ import java.util.Optional;
 public class PatientService implements PatientUseCase {
     
     private final PatientRepository repository;
+    private final NoteClient client;
     
     @Override
     public List<Patient> getAll() {
@@ -85,11 +88,18 @@ public class PatientService implements PatientUseCase {
         return repository.save(patientFound);
     }
     
+    /**
+     * Method to delete a patient and all their notes.
+     * Required the NoteClient to delete all notes of the patient.
+     *
+     * @param id - String - Patient'id.
+     */
     @Override
     public void deleteById(String id) {
         
         log.debug("Patient's id to delete: " + id);
         repository.deleteById(id);
+        client.deleteNotesByPatientId(id);
     }
     
     /**
