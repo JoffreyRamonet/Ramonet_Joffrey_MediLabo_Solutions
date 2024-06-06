@@ -19,7 +19,8 @@
     <module>microservice_backend_note</module>
     <module>microservice_backend_assessor</module>
     <module>microservice_gateway</module>
-    <module>configuration_server</module>
+    <module>microservice_configuration_server</module>
+    <module>microservice_eureka_server</module>
   </modules>
 
   <dependencies>

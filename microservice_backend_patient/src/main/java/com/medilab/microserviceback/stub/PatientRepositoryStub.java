@@ -6,6 +6,10 @@ import com.medilab.microserviceback.repository.PatientRepository;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Mock the repository for tests.
+ * Get all data from DataBaseStub and use the List<Patient> like the database.
+ */
 public class PatientRepositoryStub implements PatientRepository {
     
     private final DataBaseStub data = new DataBaseStub();

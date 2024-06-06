@@ -13,6 +13,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * The TriggerCounter service expose only one method that return the number of trigger present in the patient notes.
+ * Requires a NoteClient to get the list<NoteBean> of the patient.
+ * @see NoteClient
+ * Requires a TriggerRepository to get the list<Trigger>
+ * @see TriggerRepository
+ */
 @Service
 @AllArgsConstructor
 @Slf4j
@@ -21,7 +28,12 @@ public class TriggerCounter {
     private NoteClient client;
     private TriggerRepository repository;
     
-    
+    /**
+     * Method to count the number of triggers presence in the patient notes.
+     * @param id - String - Patient's id.
+     * @return - Integer - The number of triggers.
+     * @see TriggerRepository#findAll()
+     */
     public Integer triggerCounter(String id) {
         
         List<String> all = repository.findAll()
@@ -50,6 +62,14 @@ public class TriggerCounter {
         return counter;
     }
     
+    /**
+     * Method to format all NoteBean that returned by the NoteClient in an Array of String.
+     *
+     * Check if Hémoglobine and A1C next and concatenate to be counted in the calculation.
+     * @param id - String - Patient's id
+     * @return - List<String>
+     * @see NoteClient#getNotesByPatientId(String)
+     */
     private List<String> getAllNotes(String id) {
         
         String notesString = client.getNotesByPatientId(id)

@@ -56,7 +56,7 @@ public class TriggerController {
     @PostMapping("/trigger/save")
     public Trigger save(@RequestBody final NewTriggerDto newTriggerDto) throws TriggerAlreadyExistException {
         
-        log.debug("TriggerController - save - Notes parsed to save: " + newTriggerDto.getName());
+        log.debug("TriggerController - save - Notes parsed to save: " + newTriggerDto.name());
         
         return service.save(newTriggerDto);
     }

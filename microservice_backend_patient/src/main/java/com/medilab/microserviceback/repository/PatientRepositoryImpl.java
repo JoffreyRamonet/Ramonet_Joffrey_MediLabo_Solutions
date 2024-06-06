@@ -1,19 +1,25 @@
 package com.medilab.microserviceback.repository;
 
 import com.medilab.microserviceback.model.Patient;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Implement the PatientRepository.
+ * Forwards requests to ClientMySql to query the MySQL database.
+ *
+ * @see PatientRepository
+ * @see ClientMySql
+ */
 @Repository
-public class PatientRepositoryImpl implements PatientRepository{
+@AllArgsConstructor
+public class PatientRepositoryImpl implements PatientRepository {
     
-    @Autowired
-    private  ClientMySql repository;
+    
+    private final ClientMySql repository;
     
     @Override
     public List<Patient> findAll() {
@@ -37,8 +43,6 @@ public class PatientRepositoryImpl implements PatientRepository{
     
     @Override
     public void deleteById(String id) {
-    repository.deleteById(id);
+        repository.deleteById(id);
     }
-    
-    
 }

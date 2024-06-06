@@ -5,6 +5,9 @@ import com.medilab.microserviceback.model.Patient;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Mock of the database for tests.
+ */
 public final class DataBaseStub {
     
     private final List<Patient> persons = new ArrayList<>(List.of(

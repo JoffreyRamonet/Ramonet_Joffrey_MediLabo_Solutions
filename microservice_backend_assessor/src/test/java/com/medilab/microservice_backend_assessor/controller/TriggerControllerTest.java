@@ -65,8 +65,7 @@ public class TriggerControllerTest {
     
     @Test
     public void saveShouldSaveANewTriggerTest() throws Exception {
-        NewTriggerDto newTriggerDto = new NewTriggerDto();
-        newTriggerDto.setName("test");
+        NewTriggerDto newTriggerDto = new NewTriggerDto("test");
         
         mvc.perform(
                         post("/microservice_backend_accessor/v1/accessor/trigger/save").contentType(MediaType.APPLICATION_JSON)

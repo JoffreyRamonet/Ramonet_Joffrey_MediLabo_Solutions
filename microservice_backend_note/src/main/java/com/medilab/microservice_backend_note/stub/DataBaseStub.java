@@ -6,9 +6,12 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.List;
 
+/**
+ * Mock of the database for tests.
+ */
 public final class DataBaseStub {
     
-   
+    
     private final List<Note> noteBeanList =
             List.of(new Note("39dbeca5-74bc-44ed-973b-03a197d852b4", "90229de5-9024-4cdd-8dec-f7c54669b336",
                             "Le patient déclare avoir fait une Réaction aux médicaments au cours des 3 derniers mois Il remarque également que son audition continue d'être Anormale",

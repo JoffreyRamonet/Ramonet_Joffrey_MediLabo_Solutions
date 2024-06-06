@@ -9,6 +9,15 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
+/**
+ * The InitialDataLoader check if all data are already present in the database. If not, saves them.
+ * <p>
+ * Requires a NoteRepository to check the data's presence and to save data.
+ *
+ * @see NoteRepository
+ * </p>
+ * @see Note
+ */
 @Component
 @Slf4j
 public class InitialDataLoader {
@@ -44,11 +53,20 @@ public class InitialDataLoader {
     Note note9 = new Note("9c77c96c-4228-4abd-9fc2-83763a6e8a95", "d341589d-906c-4d67-8f24-d3db885efe9b",
             "Taille, Poids, Cholestérol, Vertige et Réaction", LocalDateTime.now());
     
+    /**
+     * Event that will be executed at runtime.
+     * Launch the verification and save data if it's required.
+     *
+     * @param event - the event.
+     * @see #dataCheck()
+     * @see #injectData()
+     */
     @EventListener
     public void initialDataLoader(ApplicationReadyEvent event) {
         
         log.info("InitialDataLoader initialize...");
         log.info("Checking the presence of data in progress... ");
+        
         dataCheck();
         
         if(dataCheck()) {
@@ -62,7 +80,12 @@ public class InitialDataLoader {
         log.info("InitialDataLoader ended");
     }
     
-    
+    /**
+     * Method called by the initialDataLoader to verify if all data is present in the database.
+     *
+     * @return boolean - true if all data are present, false if is not.
+     * @see #initialDataLoader(ApplicationReadyEvent)
+     */
     private boolean dataCheck() {
         if(noteRepository.findById(note1.getId())
                 .isEmpty() || noteRepository.findById(note1.getId())
@@ -80,6 +103,12 @@ public class InitialDataLoader {
             return false;
     }
     
+    /**
+     * Method called by the initialDataLoader to save data in the database.
+     *
+     * @see #initialDataLoader(ApplicationReadyEvent)
+     * @see NoteRepository#save(Note)
+     */
     private void injectData() {
         noteRepository.save(note1);
         noteRepository.save(note2);

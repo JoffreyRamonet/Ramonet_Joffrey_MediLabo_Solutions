@@ -5,6 +5,10 @@ import com.medilab.microservice_backend_assessor.microservice_client.PatientClie
 
 import java.util.List;
 
+/**
+ * Mock the patient client for tests.
+ * Get all data from DataBaseStub and use the List<PatientBean> like the proxy.
+ */
 public class PatientClientImplStub implements PatientClient {
     
     private final DataBaseStub dataBaseStub = new DataBaseStub();

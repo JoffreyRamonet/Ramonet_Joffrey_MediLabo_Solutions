@@ -11,6 +11,16 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The NoteService is the main class of the microservice-backend-note that perform business treatments.
+ * <p>
+ * Implement the NoteUseCase.
+ *
+ * @see NoteUseCase
+ * Requires a NoteRepository class to request the database.
+ * @see NoteRepository
+ * </p>
+ */
 @Service
 @AllArgsConstructor
 @Slf4j
@@ -61,7 +71,8 @@ public class NoteService implements NoteUseCase {
     @Override
     public Note update(NoteUpdateDto noteUpdateDto) {
         
-        log.debug("NoteService - update - Note to update: " + noteUpdateDto.id() + ", information to update: " + noteUpdateDto.note());
+        log.debug("NoteService - update - Note to update: " + noteUpdateDto.id() + ", information to update: " +
+                noteUpdateDto.note());
         
         Note noteFound = getById(noteUpdateDto.id()).get();
         

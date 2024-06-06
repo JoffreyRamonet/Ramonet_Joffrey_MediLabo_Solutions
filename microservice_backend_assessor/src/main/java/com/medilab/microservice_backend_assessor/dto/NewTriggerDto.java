@@ -1,11 +1,18 @@
 package com.medilab.microservice_backend_assessor.dto;
 
-import lombok.Data;
+import com.medilab.microservice_backend_assessor.model.Trigger;
+import com.medilab.microservice_backend_assessor.service.TriggerService;
 
-@Data
-public class NewTriggerDto {
+
+/**
+ * The Data Transfer Object to save a new Trigger.
+ *
+ * @param name - String
+ * @see Trigger
+ * @see TriggerService#save(NewTriggerDto) (UpdateTriggerDto)
+ */
+
+public record NewTriggerDto(String name) {
     
-    private String name;
-    
-    
+
 }

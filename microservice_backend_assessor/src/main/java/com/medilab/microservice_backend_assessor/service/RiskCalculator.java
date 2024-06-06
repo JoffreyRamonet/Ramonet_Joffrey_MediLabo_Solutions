@@ -7,6 +7,18 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+/**
+ * Service class to perform the risk calculation.
+ * <p>
+ * Requires a PatientClient to obtain patient data which the risk should be calculated.
+ *
+ * @see PatientClient
+ * Requires a TriggerCounter to obtain the number of trigger in the patient's notes.
+ * @see TriggerCounter
+ * Requires AgeCalculator to know if the patient is more or less than thirty years old.
+ * @see AgeCalculator
+ * </p>
+ */
 @Service
 @AllArgsConstructor
 @Slf4j
@@ -16,6 +28,21 @@ public class RiskCalculator {
     private TriggerCounter triggerCounter;
     private AgeCalculator ageCalculator;
     
+    /**
+     * The method to perform the risk calculation.
+     * <p>
+     * To calculates the risk the method requires:
+     * The gender of the patient
+     * @see PatientClient#getPatientById(String)
+     * The number of triggers in the patient notes.
+     * @see TriggerCounter#triggerCounter(String)
+     * If the patient is more or less than thirty years old.
+     * @see AgeCalculator#moreThirty(String)
+     *
+     * @param id - String - the id of the patient which the risk should be calculated.
+     * @return - RiskResult
+     * </p>
+     */
     public RiskResult riskCalculator(String id) {
         
         PatientBean patient = patientClient.getPatientById(id);

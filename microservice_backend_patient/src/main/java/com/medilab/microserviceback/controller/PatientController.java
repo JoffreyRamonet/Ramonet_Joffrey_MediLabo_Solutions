@@ -21,6 +21,32 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The main controller of the microservice-backend-patient, expose all endpoints.
+ * <p>
+ * Use GET - POST - PATCH - DELETE http requests.
+ * The default url to call the controller is:
+ * {@snippet lang = "Properties"}:
+ * "/microservice_backend_patient/v1/patient"
+ * </p>
+ * <p>
+ * Requests return Patient(s) model.
+ *
+ * @see Patient
+ * Requests require PatientSaveDto to save a new patient in the database.
+ * @see PatientSaveDto
+ * Requests require PatientUpdateDto to modify a patient in the database.
+ * @see PatientUpdateDto
+ * Requires a PatientUseCase to apply business treatments and receive data.
+ * @see PatientUseCase
+ * </p>
+ * <p>
+ * Requests can throw exceptions if the patient is not found.
+ * @see DataNotFoundException
+ * Save request can throw an exception if the patient already exist in the database.
+ * @see PatientAlreadyExistException
+ * </p>
+ */
 @RestController
 @AllArgsConstructor
 @Slf4j
@@ -31,9 +57,10 @@ public class PatientController {
     
     @GetMapping("/all")
     public List<Patient> getAll() {
+        
         List<Patient> patients = patientService.getAll();
         
-        log.debug("Patients list size: " + patients.size());
+        log.debug("PatientController - getAll - Notes list size: " + patients.size());
         return patients;
     }
     
@@ -41,21 +68,25 @@ public class PatientController {
     public Patient getById(
             @PathVariable
             final String id) {
+        
         Optional<Patient> patient = patientService.getById(id);
         
         if(patient.isEmpty()) {
             throw new DataNotFoundException("Patient not found");
         }
-        log.debug("Patient found: " + patient.get()
-                .getID());
+        
+        log.debug("PatientController - getById - id parsed: " + id);
+        
         return patient.get();
     }
     
     @PostMapping("/save")
     public Patient save(
             @RequestBody PatientSaveDto patient) throws PatientAlreadyExistException {
-        log.debug("Patient parsed to save: " + patient.firstName() + " - " + patient.lastName() + " - " +
-                patient.birthDate() + " - " + patient.gender() + " - " + patient.address() + " - " + patient.phone());
+        
+        log.debug("PatientController - save - Patient parsed to save: " + patient.firstName() + " - " +
+                patient.lastName() + " - " + patient.birthDate() + " - " + patient.gender() + " - " +
+                patient.address() + " - " + patient.phone());
         
         if(patientService.getByName(patient.firstName(), patient.lastName())
                 .isPresent()) {
@@ -69,9 +100,9 @@ public class PatientController {
     public Patient update(
             @RequestBody PatientUpdateDto patientUpdateDto) {
         
-        log.debug("Patients to update: " + patientUpdateDto.firstName() + ", " + patientUpdateDto.lastName() +
-                "Patient's informations to update: " + patientUpdateDto.gender() + " - " + patientUpdateDto.address() +
-                " - " + patientUpdateDto.phone());
+        log.debug("PatientController - update - Patients to update: " + patientUpdateDto.firstName() + ", " +
+                patientUpdateDto.lastName() + "Patient's informations to update: " + patientUpdateDto.gender() + " - " +
+                patientUpdateDto.address() + " - " + patientUpdateDto.phone());
         
         return patientService.update(patientUpdateDto);
     }
@@ -81,12 +112,14 @@ public class PatientController {
     public void deleteById(
             @PathVariable
             final String id) {
-        log.debug(id);
+        
         if(patientService.getById(id)
                 .isEmpty()) {
             throw new DataNotFoundException("Patient not found");
         } else {
             patientService.deleteById(id);
         }
+        
+        log.debug("PatientController - deleteById - Id to delete: " + id);
     }
 }

@@ -7,6 +7,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+/**
+ * Mock the repository for tests.
+ * Get all data from DataBaseStub and use the List<Note> like the database.
+ */
 public class NoteRepositoryImplStub implements NoteRepository {
     
     private final DataBaseStub data = new DataBaseStub();

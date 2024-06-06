@@ -9,6 +9,10 @@ import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
+/**
+ * The trigger model store data will be used to calculate the risk.
+ * Stored in the table trigger.
+ */
 @Entity
 @Data
 @AllArgsConstructor
@@ -22,7 +26,8 @@ public class Trigger {
     
     
     public Trigger(String name) {
-        this.id = UUID.randomUUID().toString();
+        this.id = UUID.randomUUID()
+                .toString();
         this.name = name;
     }
 }
