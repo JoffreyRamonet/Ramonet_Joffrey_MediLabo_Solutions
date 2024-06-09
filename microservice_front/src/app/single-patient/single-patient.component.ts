@@ -60,4 +60,5 @@ export class SinglePatientComponent {
   onNewNote(): void {
     this.router.navigateByUrl(`new/note/${this.id}`);
   }
+
 }

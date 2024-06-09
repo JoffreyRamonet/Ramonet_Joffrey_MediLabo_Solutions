@@ -33,6 +33,5 @@ export class SecurityService {
 
   public isAdmin(): boolean {
     return (this.role.includes('ADMIN'))
-
   }
 }
