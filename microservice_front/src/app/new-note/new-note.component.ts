@@ -74,4 +74,5 @@ export class NewNoteComponent implements OnInit {
     this.display = !this.display;
   }
 
+
 }

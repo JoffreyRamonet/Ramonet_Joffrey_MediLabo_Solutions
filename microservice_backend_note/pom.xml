@@ -13,8 +13,8 @@
     <artifactId>microservice-backend-note</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
-    <name>microservice_backend_note</name>
-    <description>microservice_backend_note</description>
+    <name>microservice-backend-note</name>
+    <description>microservice-backend-note</description>
 
     <properties>
         <java.version>21</java.version>

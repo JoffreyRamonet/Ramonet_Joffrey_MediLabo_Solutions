@@ -10,11 +10,11 @@
     </parent>
 
     <groupId>com.medilab</groupId>
-    <artifactId>microservice_backend_patient</artifactId>
+    <artifactId>microservice-backend-patient</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
-    <name>microservice-backend_patient</name>
-    <description>microservice-backend_patient</description>
+    <name>microservice-backend-patient</name>
+    <description>microservice-backend-patient</description>
     <packaging>jar</packaging>
 
     <properties>

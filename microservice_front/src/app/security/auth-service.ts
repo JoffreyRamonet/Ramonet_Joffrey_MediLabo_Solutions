@@ -1,6 +1,7 @@
 import {Injectable} from "@angular/core";
 import {KeycloakService} from "keycloak-angular";
 import {KeycloakProfile, KeycloakTokenParsed} from "keycloak-js";
+import {from, Observable} from "rxjs";
 
 @Injectable()
 export class AuthService{
@@ -29,12 +30,16 @@ export class AuthService{
     this.keycloakService.logout(window.location.origin);
   }
 
-  isTokenExpired() {
-    return this.keycloakService?.isTokenExpired();
+  public isTokenExpired() {
+    return this.keycloakService?.getKeycloakInstance().isTokenExpired();
   }
 
   public getRoles(): string[]{
     return this.keycloakService.getUserRoles();
+  }
+
+  refresh(): Observable<any>{
+    return from(this.keycloakService.getKeycloakInstance().updateToken(1800));
   }
 
   async getToken() {
@@ -43,12 +48,15 @@ export class AuthService{
     }
     if (this.isTokenExpired()) {
       try {
-        await this.keycloakService?.updateToken();
+        this.refresh().subscribe();
       } catch (error) {
         return null;
       }
     }
+
     this.token = await this.keycloakService.getToken().then(jwt => this.token = jwt);
     return this.token;
     };
+
+
 }

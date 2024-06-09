@@ -14,23 +14,23 @@ export class AccessorService{
   constructor(private http: HttpClient){}
 
   getAllTriggers(): Observable<Trigger[]>{
-    return this.http.get<Trigger[]>('http://localhost:9000/accessor/trigger/all');
+    return this.http.get<Trigger[]>('http://localhost:9000/trigger/all');
   }
 
   getTriggerById(id: string): Observable<Trigger>{
-    return this.http.get<Trigger>(`http://localhost:9000/accessor/trigger/${id}`)
+    return this.http.get<Trigger>(`http://localhost:9000/trigger/${id}`)
   }
 
   saveNewTrigger(newTrigger: NewTrigger): Observable<Trigger>{
-    return this.getAllTriggers().pipe(switchMap => this.http.post<Trigger>('http://localhost:9000/accessor/trigger/save', newTrigger));
+    return this.getAllTriggers().pipe(switchMap => this.http.post<Trigger>('http://localhost:9000/trigger/save', newTrigger));
   }
 
   deleteTrigger(id: string): Observable<void>{
-    return this.http.delete<void>(`http://localhost:9000/accessor/trigger/delete/${id}`);
+    return this.http.delete<void>(`http://localhost:9000/trigger/delete/${id}`);
   }
 
   getRisk(id: string): Observable<Risk>{
-    return this.http.get<Risk>(`http://localhost:9000/accessor/${id}`)
+    return this.http.get<Risk>(`http://localhost:9000/assessor/${id}`)
   }
 
 }
