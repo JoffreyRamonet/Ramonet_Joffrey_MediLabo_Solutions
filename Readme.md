@@ -2,6 +2,8 @@
 
 ![The medilabo_solutions logo](/assets/logo.jpeg)
 
+<div style="display: block; margin-left: 40%">
+
 ## Table of contents
 
 - [I. What is medilabo_solutions?](#what-is-medilabo_solutions?)
@@ -35,6 +37,8 @@
     - [VII-II. Dockers running](#docker-running)
 - [VIII. Easy start](#easy-start)
 
+</div>
+
 ___
 ___
 
@@ -42,6 +46,8 @@ ___
 
 Médilabo_solution is a software solutions development company, designed to help clinics and private health practices
 detect disease risks.
+
+<div style="display: block; margin-left: 2%">
 
 ___
 
@@ -67,10 +73,12 @@ ___
 Of course, practician mentors can be identified and have the rights to modify the keyword list, by adding, modifying or
 deleting a word.
 
+</div>
+
 ___
 ___
 
-### <a id="technologies-used"></a>II. Technologies used
+## <a id="technologies-used"></a>II. Technologies used
 
 [![Java](https://img.shields.io/badge/Java-21-orange)](https://www.oracle.com/fr/java/technologies/downloads/#java21)
 [![Spring](https://img.shields.io/badge/SpringBoot-3.3.0-green)](https://docs.spring.io/spring-boot/index.html)
@@ -107,6 +115,8 @@ They're three layers in the architecture:<br>
 
 
 *** schema ***
+
+<div style="display: block; margin-left: 2%">
 
 ___
 
@@ -643,6 +653,8 @@ To perform the risk calculation, in additional of the number of Triggers, the se
 
 <br>
 
+</div>
+
 ___
 ___
 
@@ -703,6 +715,8 @@ Third launch:
 > microservice-front
 
 </p>
+
+<div style="display: block; margin-left: 2%">
 
 ___
 
@@ -777,10 +791,14 @@ This docker must wait the healthy return of the configuration-server healthcheck
 The docker microservice-backend-note use base image create by the &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [![Dockerfile](https://img.shields.io/badge/Dockerfile-3333ff)](./microservice-front/Dockerfile) <br>
 This docker must wait the healthy return of the keycloak healthcheck.
 
+</div>
+
 ___
 ___
 
 ## <a id="recover-the-project"></a>VI. Recover the project
+
+<div style="display: block; margin-left: 2%">
 
 ### <a id="just-recover-the-project"></a>VI-I. Just recover the project
 
@@ -816,12 +834,16 @@ Then, clone your new project from your remote github repository to your local gi
 You must replace all <...>` by your own value.<br>
 </p>
 
+</div>
+
 ___
 ___
 
 ## <a id="running-the-project"></a>VII. Running the project
 
 There are two ways to run the project, locally or with Dockers.
+
+<div style="display: block; margin-left: 2%">
 
 ### <a id="local-running"></a>VII-I. Local running
 
@@ -871,6 +893,8 @@ Then, run the docker compose:
 
 > docker compose up
 </p>
+
+</div>
 
 ___
 ___
