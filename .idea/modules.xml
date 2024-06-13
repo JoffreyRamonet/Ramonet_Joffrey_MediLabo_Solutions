@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../medilabo_solution_config_server_repository/medilabo_solution_config_server_repository.iml" filepath="$PROJECT_DIR$/../medilabo_solution_config_server_repository/medilabo_solution_config_server_repository.iml" />
+      <module fileurl="file://$PROJECT_DIR$/microservice_backend_patient/microservice-backend-patient.iml" filepath="$PROJECT_DIR$/microservice_backend_patient/microservice-backend-patient.iml" />
     </modules>
   </component>
 </project>

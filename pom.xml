@@ -15,12 +15,12 @@
   </properties>
 
   <modules>
-    <module>microservice_backend_patient</module>
-    <module>microservice_backend_note</module>
-    <module>microservice_backend_assessor</module>
-    <module>microservice_gateway</module>
-    <module>microservice_configuration_server</module>
-    <module>microservice_eureka_server</module>
+    <module>microservice-backend-patient</module>
+    <module>microservice-backend-note</module>
+    <module>microservice-backend-assessor</module>
+    <module>microservice-gateway</module>
+    <module>microservice-configuration-server</module>
+    <module>microservice-eureka-server</module>
   </modules>
 
   <dependencies>
