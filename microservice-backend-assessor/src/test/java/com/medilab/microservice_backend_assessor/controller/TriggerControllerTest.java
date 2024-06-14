@@ -32,7 +32,7 @@ public class TriggerControllerTest {
     
     private ObjectMapper objectMapper;
     
-    private final String URL = "/microservice_backend_assessor/v1/trigger";
+    private final String URL = "/microservice-backend-assessor/v1/trigger";
     
     @BeforeEach
     public void setup() {

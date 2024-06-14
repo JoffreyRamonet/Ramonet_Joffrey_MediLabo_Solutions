@@ -38,6 +38,8 @@ public class PatientControllerTest {
     
     private ObjectMapper objectMapper;
     
+    private final String URL = "/microservice-backend-patient/v1/patient";
+    
     @BeforeEach
     public void setup(){
         this.mvc = MockMvcBuilders.standaloneSetup(controller).build();
@@ -50,7 +52,7 @@ public class PatientControllerTest {
         int size = repository.findAll()
                 .size();
         
-        mvc.perform(get("/microservice_backend_patient/v1/patient/all"))
+        mvc.perform(get(URL + "/all"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.size()").value(size))
                 .andDo(print());
@@ -62,7 +64,7 @@ public class PatientControllerTest {
         Patient result = repository.findById(id)
                 .get();
         
-        mvc.perform(get("/microservice_backend_patient/v1/patient/{id}", id))
+        mvc.perform(get(URL + "/{id}", id))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(id))
                 .andExpect(jsonPath("$.firstName").value(result.getFirstName()))
@@ -75,7 +77,7 @@ public class PatientControllerTest {
         PatientSaveDto personSaveDto =
                 new PatientSaveDto("lastName", "firstName", "1993-02-05", "M", "my address", "111-555-8888");
         
-        mvc.perform(post("/microservice_backend_patient/v1/patient/save").contentType(MediaType.APPLICATION_JSON)
+        mvc.perform(post(URL + "/save").contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(personSaveDto)))
                 .andExpect(status().isOk())
                 .andDo(print());
@@ -86,7 +88,7 @@ public class PatientControllerTest {
         PatientUpdateDto patientUpdateDto =
                 new PatientUpdateDto("TestEarlyOnset", "Test", "F", "my New Address", "123-123-1234");
         
-        mvc.perform(patch("/microservice_backend_patient/v1/patient/update").contentType(MediaType.APPLICATION_JSON)
+        mvc.perform(patch(URL + "/update").contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(patientUpdateDto)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.firstName").value(patientUpdateDto.firstName()))
@@ -97,8 +99,8 @@ public class PatientControllerTest {
     @Test
     void shouldDeletePatientByIdTest() throws Exception {
         String id = "7e9ad759-f6da-4474-b8b8-0e3a37bbe6fd";
-        
-        mvc.perform(delete("/microservice_backend_patient/v1/patient/delete/{id}", id))
+
+        mvc.perform(delete(URL + "/delete/{id}", id))
                 .andExpect(status().isOk())
                 .andDo(print());
     }

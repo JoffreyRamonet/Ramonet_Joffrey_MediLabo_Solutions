@@ -7,11 +7,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="microservice-gateway" />
         <module name="microservice-configuration-server" />
         <module name="microservice_backend_patient" />
         <module name="microservice_gateway" />
         <module name="microservice-eureka-server" />
         <module name="microservice_configuration_server" />
+        <module name="microservice-backend-assessor" />
         <module name="microservice_backend_note" />
         <module name="microservice_eureka_server" />
       </profile>

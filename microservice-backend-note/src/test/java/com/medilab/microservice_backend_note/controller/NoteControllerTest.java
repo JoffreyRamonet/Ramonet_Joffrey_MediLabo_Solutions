@@ -32,6 +32,8 @@ public class NoteControllerTest {
     private MockMvc mvc;
     private ObjectMapper objectMapper;
     
+    private final String URL = "/microservice-backend-note/v1/note";
+    
     @BeforeEach
     public void setUp() {
         this.mvc = MockMvcBuilders.standaloneSetup(controller)
@@ -44,7 +46,7 @@ public class NoteControllerTest {
         int size = repository.findAll()
                 .size();
         
-        mvc.perform(get("/microservice_backend_note/v1/note/all"))
+        mvc.perform(get(URL + "/all"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.size()").value(size))
                 .andDo(print());
@@ -56,7 +58,7 @@ public class NoteControllerTest {
         Note noteFound = repository.findById(id)
                 .get();
         
-        mvc.perform(get("/microservice_backend_note/v1/note/{id}", id))
+        mvc.perform(get(URL + "/{id}", id))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.note").value(noteFound.getNote()))
                 .andDo(print());
@@ -68,7 +70,7 @@ public class NoteControllerTest {
         int size = repository.findByPatient(id)
                 .size();
         
-        mvc.perform(get("/microservice_backend_note/v1/note/patient/{id}", id))
+        mvc.perform(get(URL + "/patient/{id}", id))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.size()").value(size))
                 .andDo(print());
@@ -78,7 +80,7 @@ public class NoteControllerTest {
     void saveShouldSaveANewNoteTest() throws Exception {
         NoteDto noteDto = new NoteDto("d341589d-906c-4d67-8f24-d3db885efe9b", "test");
         
-        mvc.perform(post("/microservice_backend_note/v1/note/save").contentType(MediaType.APPLICATION_JSON)
+        mvc.perform(post(URL + "/save").contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(noteDto)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.note").value(noteDto.note()))
@@ -90,7 +92,7 @@ public class NoteControllerTest {
         NoteUpdateDto noteUpdateDto = new NoteUpdateDto("9c77c96c-4228-4abd-9fc2-83763a6e8a95",
                 "Taille, Poids, Cholestérol, Vertige et Réaction et plus encore");
         
-        mvc.perform(patch("/microservice_backend_note/v1/note/update").contentType(MediaType.APPLICATION_JSON)
+        mvc.perform(patch(URL + "/update").contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(noteUpdateDto)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.note").value(noteUpdateDto.note()))
@@ -102,7 +104,7 @@ public class NoteControllerTest {
         Note note = new Note("test", "test");
         repository.save(note);
         
-        mvc.perform(delete("/microservice_backend_note/v1/note/delete/{id}", note.getId()))
+        mvc.perform(delete(URL + "/delete/{id}", note.getId()))
                 .andExpect(status().isOk());
     }
     
@@ -111,7 +113,7 @@ public class NoteControllerTest {
         Note note = new Note("test", "test");
         repository.save(note);
         
-        mvc.perform(delete("/microservice_backend_note/v1/note/patient/delete/{id}", note.getPatient()))
+        mvc.perform(delete(URL + "/patient/delete/{id}", note.getPatient()))
                 .andExpect(status().isOk());
     }
 }
