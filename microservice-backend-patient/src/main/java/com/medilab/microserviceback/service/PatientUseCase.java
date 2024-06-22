@@ -2,6 +2,7 @@ package com.medilab.microserviceback.service;
 
 import com.medilab.microserviceback.dto.PatientSaveDto;
 import com.medilab.microserviceback.dto.PatientUpdateDto;
+import com.medilab.microserviceback.error.PatientAlreadyExistException;
 import com.medilab.microserviceback.model.Patient;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public interface PatientUseCase {
     
     Optional<Patient> getByName(String firstname, String lastname);
     
-    Patient save(PatientSaveDto patientSaveDto);
+    Patient save(PatientSaveDto patientSaveDto) throws PatientAlreadyExistException;
     
     Patient update(PatientUpdateDto patientUpdateDto);
     

@@ -2,6 +2,7 @@ package com.medilab.microserviceback.service;
 
 import com.medilab.microserviceback.dto.PatientSaveDto;
 import com.medilab.microserviceback.dto.PatientUpdateDto;
+import com.medilab.microserviceback.error.PatientAlreadyExistException;
 import com.medilab.microserviceback.model.Patient;
 import com.medilab.microserviceback.stub.NoteClientImplStub;
 import com.medilab.microserviceback.stub.PatientRepositoryStub;
@@ -52,7 +53,7 @@ public class PatientServiceTest {
     }
     
     @Test
-    void shouldSavePatientTest() {
+    void shouldSavePatientTest() throws PatientAlreadyExistException {
         PatientSaveDto patientSaveDto =
                 new PatientSaveDto("lastName", "firstName", "1993-02-05", "M", "my address", "111-555-8888");
         

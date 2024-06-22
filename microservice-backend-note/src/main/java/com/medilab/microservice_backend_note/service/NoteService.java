@@ -93,7 +93,7 @@ public class NoteService implements NoteUseCase {
     public void deleteByPatient(String id) {
         
         log.debug("NoteService - deleteByPatient - Id to delete: " + id);
+            repository.deleteByPatient(id);
         
-        repository.deleteByPatient(id);
     }
 }

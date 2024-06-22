@@ -24,6 +24,7 @@
     "angular-aside": "^1.4.0",
     "angular-oauth2-oidc": "^17.0.2",
     "auth0-js": "^9.26.1",
+    "bootstrap": "^5.3.3",
     "keycloak-angular": "^15.2.1",
     "keycloak-js": "^24.0.4",
     "keycloak-ts": "^1.0.0",

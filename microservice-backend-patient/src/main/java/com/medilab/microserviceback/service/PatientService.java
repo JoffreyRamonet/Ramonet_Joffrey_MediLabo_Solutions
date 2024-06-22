@@ -2,6 +2,7 @@ package com.medilab.microserviceback.service;
 
 import com.medilab.microserviceback.dto.PatientSaveDto;
 import com.medilab.microserviceback.dto.PatientUpdateDto;
+import com.medilab.microserviceback.error.PatientAlreadyExistException;
 import com.medilab.microserviceback.microservice_client.NoteClient;
 import com.medilab.microserviceback.model.Patient;
 import com.medilab.microserviceback.repository.PatientRepository;
@@ -50,7 +51,12 @@ public class PatientService implements PatientUseCase {
     }
     
     @Override
-    public Patient save(PatientSaveDto patientSaveDto) {
+    public Patient save(PatientSaveDto patientSaveDto) throws PatientAlreadyExistException {
+        
+        if(getByName(patientSaveDto.firstName(), patientSaveDto.lastName()).isPresent()){
+            throw new PatientAlreadyExistException("Tha patient " + patientSaveDto.firstName() + " " + patientSaveDto.lastName() + " already exist.");
+        }
+        
         Patient patient = new Patient(patientSaveDto.lastName(), patientSaveDto.firstName(), patientSaveDto.birthDate(),
                 patientSaveDto.gender(), patientSaveDto.address(), patientSaveDto.phone());
         

@@ -9,10 +9,11 @@ import {AuthService} from "./security/auth-service";
 import {initializeKeycloak} from "./security/keycloak-initializer";
 import {AuthInterceptor} from "./security/auth-Interceptor";
 import {Environment} from "../environments/environment";
+import {DatePipe} from "@angular/common";
 
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideHttpClient(withInterceptorsFromDi()), provideAnimationsAsync(), KeycloakAngularModule, KeycloakService, AuthService,
+  providers: [provideRouter(routes), provideHttpClient(withInterceptorsFromDi()), provideAnimationsAsync(), KeycloakAngularModule, KeycloakService, AuthService, DatePipe,
     {
       provide: APP_INITIALIZER,
       useFactory: initializeKeycloak,

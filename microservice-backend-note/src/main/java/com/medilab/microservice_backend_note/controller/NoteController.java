@@ -134,14 +134,9 @@ public class NoteController {
     public void deleteByPatient(
             @PathVariable
             final String id) {
-        
-        if(noteService.getByPatient(id)
-                .isEmpty()) {
-            throw new DataNotFoundException("Notes of patient'id : " + id + " not found");
-        } else {
-            
+
             log.debug("NoteController - deleteByPatient - Id to delete: " + id);
             noteService.deleteByPatient(id);
-        }
+        
     }
 }

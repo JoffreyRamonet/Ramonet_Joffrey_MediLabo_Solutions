@@ -9,7 +9,7 @@ import {KeycloakAngularModule} from "keycloak-angular";
 import {HttpClientModule} from "@angular/common/http";
 import {AuthService} from "./security/auth-service";
 import {RiskAsideComponent} from "./risk-aside/risk-aside.component";
-import {NgIf} from "@angular/common";
+import {DatePipe, NgIf} from "@angular/common";
 import {AsideAdminComponent} from "./aside-admin/aside-admin.component";
 
 
