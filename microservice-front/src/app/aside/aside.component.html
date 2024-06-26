@@ -1,0 +1,15 @@
+<div class="aside-container">
+  <div *ngIf="display">
+    <app-risk-aside></app-risk-aside>
+  </div>
+  <div class="asides">
+  <aside>
+    <h2>Menu</h2>
+    <div class="menu">
+      <a routerLink="new/patient">Create a new patient</a>
+      <a routerLink="">List of patients</a>
+      <a (click)="keycloak.logout()">Logout</a>
+    </div>
+  </aside>
+  </div>
+</div>

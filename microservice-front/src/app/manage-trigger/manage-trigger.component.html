@@ -1,0 +1,31 @@
+<div class="new-trigger-card" >
+  <h2>Registry a trigger</h2>
+  <form [formGroup]="triggerForm">
+    <div class="form-group">
+      <label for="name">New trigger</label>
+      <input type="text" id="name" formControlName="name">
+    </div>
+    <div class="action-button">
+      <button type="submit" (click)="onSubmitForm()" [disabled]="triggerForm.invalid">Submit</button>
+      <button (click)="onReturn()">Back to the list</button>
+    </div>
+  </form>
+</div>
+<div class="delete-trigger-card">
+  <h2>Delete a trigger</h2>
+  <form [formGroup]="deleteTriggerForm">
+  <mat-form-field>
+    <mat-label>Trigger</mat-label>
+    <mat-select [(value)]="selection">
+    @for(trigger of triggers; track trigger){
+      <mat-option [value]="trigger.id">{{trigger.name}}</mat-option>
+    }
+    </mat-select>
+  </mat-form-field>
+    <div class="action-button">
+      <button type="submit" (click)="onSubmitEditForm()">Submit</button>
+    </div>
+  </form>
+</div>
+
+

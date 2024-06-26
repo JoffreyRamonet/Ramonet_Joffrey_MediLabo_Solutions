@@ -1,0 +1,27 @@
+<div class="new-patient-card">
+  <h2>Write a new note</h2>
+  <p>For the correct calculation of patient risks, please start the keywords with a capital letter.</p>
+  <button type="button" (click)="onDisplay()">Display keywords</button>
+  <div class="keywords" *ngIf="display">
+    <div class="sub">
+      <ul>
+        <p *ngFor="let string of sub1">{{ string }}</p>
+      </ul>
+    </div>
+    <div class="sub">
+      <ul>
+        <p *ngFor="let string of sub2">{{ string }}</p>
+      </ul>
+    </div>
+  </div>
+  <form [formGroup]="noteForm">
+    <div class="form-group">
+      <label for="note"></label>
+      <textarea type="text" id="note" formControlName="note" rows="10"></textarea>
+    </div>
+    <div class="action-button">
+      <button type="submit" (click)="onSubmitForm()" [disabled]="noteForm.invalid">Submit</button>
+      <button (click)="onReturn()">Back to the sheet</button>
+    </div>
+  </form>
+</div>

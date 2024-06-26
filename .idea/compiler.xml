@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="microservice-gateway" />
+        <module name="microservice-backend-patient" />
+        <module name="microservice-configuration-server" />
+        <module name="microservice_backend_patient" />
+        <module name="microservice_gateway" />
+        <module name="microservice-eureka-server" />
+        <module name="microservice_configuration_server" />
+        <module name="microservice-backend-assessor" />
+        <module name="microservice_backend_note" />
+        <module name="microservice_eureka_server" />
+        <module name="microservice-backend-note" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="configuration_server" target="21" />
+      <module name="eureka" target="21" />
+      <module name="microservice_backend_assessor" target="21" />
+      <module name="microservice_backend_note" target="21" />
+      <module name="microservice_backend_patient" target="21" />
+      <module name="microservice_configuration_server" target="21" />
+      <module name="microservice_eureka_server" target="21" />
+      <module name="microservice_gateway" target="21" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="configuration_server" options="-parameters" />
+      <module name="eureka" options="-parameters" />
+      <module name="microservice-backend-assessor" options="-parameters" />
+      <module name="microservice-backend-note" options="-parameters" />
+      <module name="microservice-backend-patient" options="-parameters" />
+      <module name="microservice-configuration-server" options="-parameters" />
+      <module name="microservice-eureka-server" options="-parameters" />
+      <module name="microservice-gateway" options="-parameters" />
+      <module name="microservice_backend_assessor" options="-parameters" />
+      <module name="microservice_backend_note" options="-parameters" />
+      <module name="microservice_backend_patient" options="-parameters" />
+      <module name="microservice_configuration_server" options="-parameters" />
+      <module name="microservice_eureka_server" options="-parameters" />
+      <module name="microservice_gateway" options="-parameters" />
+    </option>
+  </component>
+</project>

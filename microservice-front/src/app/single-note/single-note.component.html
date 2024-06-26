@@ -1,0 +1,12 @@
+<div class="note-card">
+  <div class="sheet">
+    <div class="note">
+      <p><b>Date:</b> {{ note.createdAt | date: 'd MMMM yyyy, à HH:mm' }}</p>
+      <p><b>Note:</b> {{ note.note }}</p>
+    </div>
+    <div class="link">
+      <button (click)="onEditNote()">Edit the patient's note</button>
+      <button class="deleteButton" (click)="onDeleteNote()">Delete the note</button>
+    </div>
+  </div>
+</div>

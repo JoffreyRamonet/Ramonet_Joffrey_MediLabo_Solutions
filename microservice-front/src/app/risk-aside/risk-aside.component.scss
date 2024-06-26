@@ -1,0 +1,54 @@
+.aside-container{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+aside {
+  box-sizing: border-box;
+  width: 20%;
+  margin: 10em auto;
+  padding: 30px 30px;
+  background-color: rgb(255, 217, 179, 0.2);
+  box-shadow: 4px 4px 20px;
+  float: left;
+}
+
+h2 {
+  text-align: center;
+  margin-top: 0px;
+}
+
+p {
+  color: rgb(0, 0, 0, 0.5) ;
+}
+
+.risk {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.none {
+  color: rgb(0, 153, 51);
+  font-weight: bold;
+  font-size: xx-large;
+}
+
+.borderline{
+  color: rgb(230, 230, 0);
+  font-weight: bold;
+  font-size: xx-large;
+}
+
+.indanger{
+  color: rgb(255, 128, 0);
+  font-weight: bold;
+  font-size: xx-large;
+}
+
+.earlyOnset{
+  color: rgb(255, 0, 0);
+  font-weight: bold;
+  font-size: xx-large;
+}

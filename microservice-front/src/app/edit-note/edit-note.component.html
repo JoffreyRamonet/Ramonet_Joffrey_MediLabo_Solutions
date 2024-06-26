@@ -1,0 +1,21 @@
+<div class="edit-note-card" *ngIf="note$ | async as note">
+  <h2>Edit a patient's note</h2>
+  <form [formGroup]="editForm">
+    <div class="editForm">
+      <p><b>Date: </b> {{ note.createdAt | date: 'd MMMM yyyy, à HH:mm'}}</p>
+    </div>
+    <div class="note">
+    <p>
+      {{ note.note }}
+    </p>
+    </div>
+    <div class="editForm">
+      <label for="note"></label>
+      <textarea type="text" id="note" formControlName="note" rows="10" placeholder="New note"></textarea>
+    </div>
+    <div class="action-button">
+      <button type="submit" (click)="onSubmitEditForm()">Submit</button>
+      <button (click)="onReturn()">Back to the sheet</button>
+    </div>
+  </form>
+</div>
